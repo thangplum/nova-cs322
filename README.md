@@ -1,6 +1,6 @@
 [![License: MIT](https://img.shields.io/github/license/vintasoftware/django-react-boilerplate.svg)](LICENSE.txt)
 
-# Django React Boilerplate
+# CS322 Nova
 
 ## About
 A [Django](https://www.djangoproject.com/) project boilerplate/template with lots of state of the art libraries and tools like:
@@ -21,27 +21,6 @@ Also, includes a Heroku `app.json` and a working Django `production.py` settings
 - Papertrail, for logs and platform errors alerts (must set them manually)
 
 This is a good starting point for modern Python/JavaScript web projects.
-
-## Project bootstrap [![CircleCI](https://circleci.com/gh/vintasoftware/django-react-boilerplate.svg?style=svg)](https://circleci.com/gh/vintasoftware/django-react-boilerplate) [![Greenkeeper badge](https://badges.greenkeeper.io/vintasoftware/django-react-boilerplate.svg)](https://greenkeeper.io/)
-- [ ] Make sure you have Python 3.8 installed
-- [ ] Install Django with `pip install django`, to have the `django-admin` command available.
-- [ ] Open the command line and go to the directory you want to start your project in.
-- [ ] Start your project using:
-    ```
-    django-admin startproject theprojectname --extension py,yml,json --name Procfile,Dockerfile,README.md,.env.example,.gitignore,Makefile --template=https://github.com/vintasoftware/django-react-boilerplate/archive/boilerplate-release.zip
-    ```
-    Alternatively, you may start the project in the current directory by placing a `.` right after the project name, using the following command:
-    ```
-    django-admin startproject theprojectname . --extension py,yml,json --name Procfile,Dockerfile,README.md,.env.example,.gitignore,Makefile --template=https://github.com/vintasoftware/django-react-boilerplate/archive/boilerplate-release.zip
-    ```
-In the next steps, always remember to replace theprojectname with your project's name
-- [ ] Above: don't forget the `--extension` and `--name` params!
-- [ ] Change the first line of README to the name of the project
-- [ ] Add an email address to the `ADMINS` settings variable in `sonaCS322/backend/sonaCS322/settings/base.py`
-- [ ] Change the `SERVER_EMAIL` to the email address used to send e-mails in `sonaCS322/backend/sonaCS322/settings/production.py`
-- [ ] Rename the folder `circleci` to `.circleci` with the command `mv circleci .circleci`
-
-After completing ALL of the above, remove this `Project bootstrap` section from the project README. Then follow `Running` below.
 
 ## Running
 ### Tools
@@ -79,57 +58,6 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
   - To add a new **backend** dependency, update `requirements.in` or `dev-requirements.in` with the newest requirements
 - After updating the desired file(s), run `make docker_update_dependencies` to update the containers with the new dependencies
   > The above command will stop and re-build the containers in order to make the new dependencies effective
-
-### If you are not using Docker:
-#### Setup and run the frontend app
-- Open a new command line window and go to the project's directory.
-- `npm install`
-- `npm run start`
-  - This is used to serve the frontend assets to be consumed by [django-webpack-loader](https://github.com/django-webpack/django-webpack-loader) and not to run the React application as usual, so don't worry if you try to check what's running on port 3000 and see an error on your browser
-
-#### Setup the backend app
-- Open a new command line window and go to the project's directory.
-- Create a new virtualenv with either [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/) or only virtualenv: `mkvirtualenv sonaCS322` or `python -m venv sonaCS322-venv`
-  > If you're using Python's virtualenv (the latter option), make sure to create the environment with the suggested name, otherwise it will be added to version control.
-- Make sure the virtualenv is activated `workon sonaCS322` or `source sonaCS322-venv/bin/activate`
-- Run `make compile_install_requirements` to install the requirements
-  > Please make sure you have already setup PostgreSQL on your environment before installing the requirements
-
-  > In case you wish to use a Conda virtual environment, please remove the line `export PIP_REQUIRE_VIRTUALENV=true; \` from `Makefile`
-
-#### Run the backend app
-- With the virtualenv enabled, go to the `backend` directory.
-- Create the migrations for `users` app: 
-  `python manage.py makemigrations`
-- Run the migrations:
-  `python manage.py migrate`
-- Run the project:
-  `python manage.py runserver`
-- Open a browser and go to `http://localhost:8000` to see the project running
-
-#### Setup Celery
-- Open a command line window and go to the project's directory
-- `workon sonaCS322` or `source sonaCS322-venv/bin/activate` depending on if you are using virtualenvwrapper or just virtualenv.
-- `python manage.py celery`
-
-#### Mailhog
-- For development, we use Mailhog to test our e-mail workflows, since it allows us to inspect the messages to validate they're correctly built
-  - Docker users already have it setup and running once they start the project
-  - For non-Docker users, please have a look [here](https://github.com/mailhog/MailHog#installation) for instructions on how to setup Mailhog on specific environments
-> The project expects Mailhog SMTP server to be running on port 1025, you may alter that by changing `EMAIL_PORT` on settings
-
-
-### Testing
-`make test`
-
-Will run django tests using `--keepdb` and `--parallel`. You may pass a path to the desired test module in the make command. E.g.:
-
-`make test someapp.tests.test_views`
-
-### Adding new pypi libs
-Add the libname to either `requirements.in` or `dev-requirements.in`, then either upgrade the libs with `make upgrade` or manually compile it and then,  install.
-`pip-compile requirements.in > requirements.txt` or `make upgrade`
-`pip install -r requirements.txt`
 
 ## Deployment 
 ### Setup
