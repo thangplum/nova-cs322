@@ -10,7 +10,9 @@ const store = configureStore({});
 const App = () => (
   <SentryBoundary>
     <Provider store={store}>
-      <Home />
+      <div className="App">
+        <Home />
+      </div>
     </Provider>
   </SentryBoundary>
 );
