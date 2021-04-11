@@ -1,5 +1,5 @@
 from django.conf.urls import include
-from django.urls import path
+from django.urls import path, re_path
 from django.contrib import admin
 
 import django_js_reverse.views
@@ -14,9 +14,10 @@ for route in routes:
     router.register(route['regex'], route['viewset'], basename=route['basename'])
 
 urlpatterns = [
-    path("", include("common.urls"), name="common"),
+    re_path(r'.*', include("common.urls"), name="common"),
     path("admin/", admin.site.urls, name="admin"),
     path("jsreverse/", django_js_reverse.views.urls_js, name="js_reverse"),
 
     path("api/", include(router.urls), name="api"),
+
 ]
