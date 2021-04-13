@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "common",
     "users",
+    "formResearch",
 ]
 
 MIDDLEWARE = [

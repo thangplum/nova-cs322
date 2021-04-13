@@ -7,3 +7,6 @@ class formResearch(models.Model):
     email= models.EmailField(max_length=200)
     student_id = models.IntegerField(default=00)
     gender = models.CharField(max_length=100, default= "Unspecified")
+
+    def __str__(self):
+        return self.firstname+" "+self.lastname
