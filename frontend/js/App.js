@@ -1,41 +1,24 @@
 import React from 'react';
 import { hot } from 'react-hot-loader/root';
 import { Provider } from 'react-redux';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-import Home from './pages/Home';
-import Calender from './pages/Calender';
-import configureStore from './store';
 import SentryBoundary from './utils/SentryBoundary';
+import { Routes } from './routes/Routes';
+import store from "./store/index";
+import NavBar from './components/Navbar';
 
-const store = configureStore({});
-const App = () => (
-  <SentryBoundary>
-    <Provider store={store}>
-      <Router>
+import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
+function App() {
+  return (
+    <SentryBoundary>
+      <Provider store={store}>
         <div className="App">
-          <Switch>
-            {/* <Route path="/about">
-              <About />
-            </Route>
-            <Route path="/users">
-              <Users />
-            </Route> */}
-            <Route path="/calender">
-              <Calender />
-            </Route>
-            <Route path="/">
-              <Home />
-            </Route>
-        </Switch>
+          <NavBar />
+          <Routes />
         </div>
-      </Router>
-    </Provider>
-  </SentryBoundary>
-);
+      </Provider>
+    </SentryBoundary>
+  );
+}
 
 export default hot(App);

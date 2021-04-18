@@ -2,7 +2,7 @@
 import * as Sentry from '@sentry/browser';
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import {BrowserRouter as Router} from 'react-router-dom';
 import '../sass/style.scss';
 
 import App from './App';
@@ -12,4 +12,9 @@ Sentry.init({
   release: window.COMMIT_SHA,
 });
 
-ReactDOM.render(<App />, document.getElementById('react-app'));
+ReactDOM.render(
+  <Router>
+    <App />
+  </Router>
+
+, document.getElementById('react-app'));
