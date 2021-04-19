@@ -19,7 +19,7 @@ const NavBar =  () => {
       <Navbar.Brand>
         <NavLink to="/">Fake Nova</NavLink>
       </Navbar.Brand>
-      <NavLink to="/calender">Calender</NavLink>
+      {isLogin && <NavLink to="/dashboard">Dashboard</NavLink>}
       <Navbar.Collapse className="justify-content-end">
         {isLogin ? <LogoutDropdown setLogin={setIsLogin} /> : <Login setLogin={setIsLogin} />}
       </Navbar.Collapse>
