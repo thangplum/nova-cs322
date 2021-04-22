@@ -14,10 +14,9 @@ for route in routes:
     router.register(route['regex'], route['viewset'], basename=route['basename'])
 
 urlpatterns = [
-    re_path(r'.*', include("common.urls"), name="common"),
     path("admin/", admin.site.urls, name="admin"),
     path("jsreverse/", django_js_reverse.views.urls_js, name="js_reverse"),
 
     path("api/", include(router.urls), name="api"),
-
+    re_path(r'.*', include("common.urls"), name="common"),
 ]

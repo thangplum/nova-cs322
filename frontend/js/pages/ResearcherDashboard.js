@@ -1,13 +1,7 @@
 import React from 'react';
-import { Row, Col, Card, ListGroup } from "react-bootstrap";
-import MyStudiesCard from "../components/ResearcherDashboard/myStudiesCard";
-import DashboardCard from "../components/ResearcherDashboard/dashboardCard";
-// import AllStudiesCard from "../components/ResearcherDashboard/allStudiesCard";
-// import AddNewStudyCard from "../components/ResearcherDashboard/addNewStudy";
-// import PrescreenResultCard from "../components/ResearcherDashboard/prescreenResult";
-// import UpcomingAppointCard from "../components/ResearcherDashboard/upcomingAppointments";
-// import RecentActivitiesCard from "../components/ResearcherDashboard/recentActivities";
+import { Row, Col } from "react-bootstrap";
 import {
+  MyStudiesCard,
   AllStudiesCard,
   AddNewStudyCard,
   PrescreenResultCard,
