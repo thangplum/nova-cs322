@@ -9,13 +9,13 @@ const Dashboard = () => {
       <h1>Who are you?</h1>
       <div>
         <ListGroup>
-            <ListGroup.Item action>
+            <ListGroup.Item action id="main-dashboard-item">
                 <Link className="link" to='/dashboard/student'>Student</Link>
             </ListGroup.Item>
-            <ListGroup.Item action>
+            <ListGroup.Item action id="main-dashboard-item">
                 <Link className="link" to='/dashboard/researcher'>Researcher</Link>
             </ListGroup.Item>
-            <ListGroup.Item action>
+            <ListGroup.Item action id="main-dashboard-item">
                 <Link className="link" to='/dashboard/instructor'>Instructor</Link>
             </ListGroup.Item>
         </ListGroup>
