@@ -19,13 +19,13 @@ export const Routes = () => {
       <ProtectedRoutes exact path='/dashboard'>
         <Dashboard/>
       </ProtectedRoutes>
-      <ProtectedRoutes path='/dashboard/student'>
+      <ProtectedRoutes path='/participant'>
         <StudentDashboard />
       </ProtectedRoutes>
-      <ProtectedRoutes path='/dashboard/researcher'>
+      <ProtectedRoutes path='/researcher'>
         <ResearcherDashboard />
       </ProtectedRoutes>
-      <ProtectedRoutes path='/dashboard/instructor'>
+      <ProtectedRoutes path='/instructor'>
         <InstructorDashboard />
       </ProtectedRoutes>
     </Switch>
