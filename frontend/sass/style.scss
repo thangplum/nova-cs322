@@ -8,27 +8,28 @@
 @import "components/all";
 @import "pages/all";
 
-#django-background {
-    color: #092e20;
-    font-size: 11pt;
-    background-repeat: no-repeat;
-    background-size: auto 200px;
-    background-position: center;
-    height: 300px;
-    background-image: url('../assets/images/django-logo-positive.png');
-}
+// #django-background {
+//     color: #092e20;
+//     font-size: 11pt;
+//     background-repeat: no-repeat;
+//     background-size: auto 200px;
+//     background-position: center;
+//     height: 300px;
+//     background-image: url('../assets/images/django-logo-positive.png');
+// }
 
-#django-logo-wrapper {
-    color: #092e20;
-    & > img {
-        width: 100px;
-    }
-}
+// #django-logo-wrapper {
+//     color: #092e20;
+//     & > img {
+//         width: 100px;
+//     }
+// }
 
-.App{
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
+
+
+
+.App {
   background-color: #63a4ff;
   background-image: linear-gradient(315deg, #63a4ff 0%, #83eaf1cb 74%);
+  min-height: 100%;
 }

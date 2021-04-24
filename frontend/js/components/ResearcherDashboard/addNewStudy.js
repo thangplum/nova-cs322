@@ -9,7 +9,7 @@ const addNewStudyCard = () => {
     <Card className="db-card">
       <Card.Header id="card-header">Add New Study</Card.Header>
       <ListGroup variant="flush">
-        <ListGroup.Item>
+        <ListGroup.Item action>
           <FontAwesomeIcon style={{ marginRight: '5px'}} icon={faPlus} />
           Create a new study
         </ListGroup.Item>

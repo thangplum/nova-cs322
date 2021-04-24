@@ -3,7 +3,10 @@
 .main-container {
   text-align: center;
   justify-content: center;
-  margin: 2vh 4vw;
+  min-height: 100vh;
+  padding-bottom: 4vh;
+  padding-left: calc(max(8vw, 20px));
+  padding-right: calc(max(8vw, 20px));
 }
 
 

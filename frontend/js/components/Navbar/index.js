@@ -15,7 +15,7 @@ const NavBar =  () => {
   }, [])
 
   return (
-    <Navbar>
+    <Navbar style={{ marginBottom: "20px" }} expand="lg">
       <Navbar.Brand>
         <NavLink to="/">Fake Nova</NavLink>
       </Navbar.Brand>

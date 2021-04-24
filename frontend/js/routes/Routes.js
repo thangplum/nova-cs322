@@ -7,8 +7,8 @@ import Home from '../pages/Home';
 import Dashboard from '../pages/Dashboard';
 import ProtectedRoutes from '../components/ProtectedRoutes';
 import StudentDashboard from '../pages/StudentDashboard';
-import ResearcherDashboard from '../pages/ResearcherDashboard';
 import InstructorDashboard from '../pages/InstructorDashboard';
+import ResearchRoutes from '../pages/Researcher/index';
 
 export const Routes = () => {
   return (
@@ -23,7 +23,7 @@ export const Routes = () => {
         <StudentDashboard />
       </ProtectedRoutes>
       <ProtectedRoutes path='/researcher'>
-        <ResearcherDashboard />
+        <ResearchRoutes />
       </ProtectedRoutes>
       <ProtectedRoutes path='/instructor'>
         <InstructorDashboard />
