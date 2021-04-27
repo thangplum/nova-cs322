@@ -8,6 +8,7 @@ import Dashboard from '../pages/Dashboard';
 import StudentDashboard from '../pages/StudentDashboard';
 import InstructorDashboard from '../pages/InstructorDashboard';
 import ResearchRoutes from '../pages/Researcher/index';
+import ParticipantRoutes from '../pages/Participant';
 
 export const Routes = () => {
   return (
@@ -19,7 +20,7 @@ export const Routes = () => {
         <Dashboard/>
       </Route>
       <Route path='/participant'>
-        <StudentDashboard />
+        <ParticipantRoutes />
       </Route>
       <Route path='/researcher'>
         <ResearchRoutes />

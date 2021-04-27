@@ -5,9 +5,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { useRouteMatch } from "react-router-dom";
 
-const ResearchNav =  () => {
-  const {path} = useRouteMatch();
-  
+const ParticipantNav =  () => {
+  const { path } = useRouteMatch();
+  console.log(path);
 
   return (
     <>
@@ -18,10 +18,8 @@ const ResearchNav =  () => {
         <Navbar.Collapse>
           <Nav className="mr-auto">
             <NavLink style={{ textDecoration: "none", marginRight: "20px" }} to={`${path}`}><FontAwesomeIcon style={{ marginRight: '5px'}} icon={faHome} /></NavLink>
-            <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to={`${path}/`}>My studies</NavLink>
-            <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to="/">All studies</NavLink>
-            <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to={`${path}/add-new`}>Add new study</NavLink>
-            <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to="/">Prescreen results</NavLink>
+            <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to={`${path}/`}>Available Studies</NavLink>
+            <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to={`${path}/`}>My schedules</NavLink>
           </Nav>
           <Form inline>
             <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to={"/logout"}>
@@ -38,4 +36,4 @@ const ResearchNav =  () => {
   );
 }
 
-export default ResearchNav;
+export default ParticipantNav;

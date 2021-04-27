@@ -4,27 +4,26 @@ import {
   Route,
   useRouteMatch
 } from "react-router-dom";
-import ResearchNav from "../../components/Navbar/ResearchNav";
-import ResearcherDashboard from './ResearcherDashboard';
-import AddNewStudies from "./AddNewStudies";
+import ParticipantNav from "../../components/Navbar/ParticipantNav";
+import Dashboard from "./Dashboard";
 
-const ResearchRoutes = () => {
+const ParticipantRoutes = () => {
   const { path } = useRouteMatch();
 
   return (
     <div id="research-routes-page" className="main-container">
-      <ResearchNav />
+      <ParticipantNav />
       <Switch>
         <Route exact path={`${path}/`}>
-          <ResearcherDashboard />
+          <Dashboard />
         </Route>
-        <Route path={`${path}/add-new`}>
+        {/* <Route path={`${path}/add-new`}>
           <AddNewStudies />
-        </Route>
+        </Route> */}
       </Switch>
       
     </div>
   );
 };
 
-export default ResearchRoutes
+export default ParticipantRoutes
