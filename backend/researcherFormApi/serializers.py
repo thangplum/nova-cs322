@@ -5,4 +5,4 @@ from .models import formResearch
 class formResearchSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = formResearch
-        fields = ("firstname", "lastname","email","student_id","gender")
+        fields = ("id","firstname", "lastname","email","student_id","gender")

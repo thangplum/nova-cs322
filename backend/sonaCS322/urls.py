@@ -1,9 +1,5 @@
 from django.conf.urls import include
-<<<<<<< HEAD
-from django.urls import path, re_path
-=======
 from django.urls import path,re_path
->>>>>>> choudry
 from django.contrib import admin
 from django.contrib.auth.views import LogoutView
 
@@ -23,15 +19,9 @@ admin.site.index_title = "Welcome to Praire Fire Manager Portal"
 urlpatterns = [
     path("admin/", admin.site.urls, name="admin"),
     path("jsreverse/", django_js_reverse.views.urls_js, name="js_reverse"),
-<<<<<<< HEAD
-
-    path("api/", include(router.urls), name="api"),
-    re_path(r'.*', include("common.urls"), name="common"),
-=======
     path('api/', include(router.urls), name="Api"),
     path('accounts/', include('allauth.urls')),
     path('logout', LogoutView.as_view()),
     re_path(r'.*', include("common.urls"), name="common"),
     
->>>>>>> choudry
 ]

@@ -16,10 +16,11 @@ const NavBar =  () => {
       </Nav>
       
       <Form inline>
-        <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to={"/logout"}>
+        {/* <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to={"/logout"}>
           Logout
           <FontAwesomeIcon style={{ marginLeft: '5px'}} icon={faSignOutAlt} />
-        </NavLink>
+        </NavLink> */}
+        <a href="logout">Log out</a>
       </Form>
       
     </Navbar>
