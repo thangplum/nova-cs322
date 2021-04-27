@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load socialaccount %}
+{% load account %}
 
 
 {% block body %}
@@ -9,5 +11,13 @@
   <h2>React Example App</h2>
   <p>Here is an example of a React app included in the Django framework:</p> -->
 
+  {% if user.is_authenticated %}
+  
+  {% user_display user %}
   <div id="react-app"></div>
+  
+  {% else %}
+  <a href="{% provider_login_url 'google' %}">Login With Google</a>
+  {% endif %}
+
 {% endblock %}

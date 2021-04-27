@@ -40,14 +40,14 @@ docker_test_reset:
 	docker-compose run backend python manage.py test $(ARG) --parallel
 
 docker_up:
-	docker-compose up -d
+	docker compose up -d
 
 docker_update_dependencies:
-	docker-compose down
-	docker-compose up -d --build
+	docker compose down
+	docker compose up -d --build
 
 docker_down:
-	docker-compose down
+	docker compose down
 
 docker_logs:
 	docker-compose logs -f $(ARG)
