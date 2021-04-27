@@ -7,7 +7,6 @@ import { useRouteMatch } from "react-router-dom";
 
 const ParticipantNav =  () => {
   const { path } = useRouteMatch();
-  console.log(path);
 
   return (
     <>
@@ -18,7 +17,7 @@ const ParticipantNav =  () => {
         <Navbar.Collapse>
           <Nav className="mr-auto">
             <NavLink style={{ textDecoration: "none", marginRight: "20px" }} to={`${path}`}><FontAwesomeIcon style={{ marginRight: '5px'}} icon={faHome} /></NavLink>
-            <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to={`${path}/`}>Available Studies</NavLink>
+            <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to={`${path}/current-studies`}>Available Studies</NavLink>
             <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to={`${path}/`}>My schedules</NavLink>
           </Nav>
           <Form inline>
