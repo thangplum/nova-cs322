@@ -1,5 +1,6 @@
 {% load render_bundle from webpack_loader %}
 
+
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
@@ -19,7 +20,9 @@
   {% include 'includes/sentry_init.html' %}
 
   <!-- Body Content -->
+  
   {% block body %}{% endblock %}
+  
 
   <!-- django-js-reverse -->
   <script src="{% url 'js_reverse' %}" type="text/javascript"></script>
