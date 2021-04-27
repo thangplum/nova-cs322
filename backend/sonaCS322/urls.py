@@ -1,5 +1,5 @@
 from django.conf.urls import include
-from django.urls import path
+from django.urls import path,re_path
 from django.contrib import admin
 from django.contrib.auth.views import LogoutView
 
@@ -17,8 +17,6 @@ admin.site.index_title = "Welcome to Praire Fire Manager Portal"
 
 
 urlpatterns = [
-    path("", include("common.urls"), name="common"),
-    path("test/", views.index, name='index'),
     path("admin/", admin.site.urls, name="admin"),
     path("jsreverse/", django_js_reverse.views.urls_js, name="js_reverse"),
     path('api/', include(router.urls), name="Api"),
