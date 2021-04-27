@@ -5,7 +5,6 @@ import {
   useRouteMatch
 } from "react-router-dom";
 import ResearchNav from "../../components/Navbar/ResearchNav";
-import ProtectedRoutes from "../../components/ProtectedRoutes";
 import ResearcherDashboard from './ResearcherDashboard';
 import AddNewStudies from "./AddNewStudies";
 
@@ -16,12 +15,12 @@ const ResearchRoutes = () => {
     <div id="research-routes-page" className="main-container">
       <ResearchNav />
       <Switch>
-        <ProtectedRoutes exact path={`${path}/`}>
+        <Route exact path={`${path}/`}>
           <ResearcherDashboard />
-        </ProtectedRoutes>
-        <ProtectedRoutes path={`${path}/add-new`}>
+        </Route>
+        <Route path={`${path}/add-new`}>
           <AddNewStudies />
-        </ProtectedRoutes>
+        </Route>
       </Switch>
       
     </div>

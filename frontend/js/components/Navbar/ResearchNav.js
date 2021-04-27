@@ -33,9 +33,9 @@ const ResearchNav =  () => {
             <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to={`${path}/add-new`}>Add new study</NavLink>
             <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to="/">Prescreen results</NavLink>
           </Nav>
-          <Form inline>
+          {/* <Form inline>
             {isLogin ? <LogoutDropdown setLogin={setIsLogin} /> : <Login setLogin={setIsLogin} />}
-          </Form>
+          </Form> */}
           
         </Navbar.Collapse>
         

@@ -5,7 +5,6 @@ import {
 } from "react-router-dom";
 import Home from '../pages/Home';
 import Dashboard from '../pages/Dashboard';
-import ProtectedRoutes from '../components/ProtectedRoutes';
 import StudentDashboard from '../pages/StudentDashboard';
 import InstructorDashboard from '../pages/InstructorDashboard';
 import ResearchRoutes from '../pages/Researcher/index';
@@ -16,18 +15,18 @@ export const Routes = () => {
       <Route exact path="/">
         <Home />
       </Route>
-      <ProtectedRoutes exact path='/dashboard'>
+      <Route exact path='/dashboard'>
         <Dashboard/>
-      </ProtectedRoutes>
-      <ProtectedRoutes path='/participant'>
+      </Route>
+      <Route path='/participant'>
         <StudentDashboard />
-      </ProtectedRoutes>
-      <ProtectedRoutes path='/researcher'>
+      </Route>
+      <Route path='/researcher'>
         <ResearchRoutes />
-      </ProtectedRoutes>
-      <ProtectedRoutes path='/instructor'>
+      </Route>
+      <Route path='/instructor'>
         <InstructorDashboard />
-      </ProtectedRoutes>
+      </Route>
     </Switch>
   );
 }
