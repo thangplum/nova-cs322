@@ -32,3 +32,10 @@ class User(AbstractBaseUser, PermissionsMixin, IndexedTimeStampedModel):
 
     def __str__(self):
         return self.email
+
+class Form(models.Model):
+    fname = models.CharField(max_length=150)
+    lname = models.CharField(max_length=50)
+    email = models.EmailField()
+    student_id = models.IntegerField()
+    gender = models.CharField(max_length=50)
