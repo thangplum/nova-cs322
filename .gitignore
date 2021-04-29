@@ -9,6 +9,8 @@ __pycache__/
 /.vscode/
 yarn.lock
 
+#database
+.db/
 # coverage result
 .coverage
 /coverage/

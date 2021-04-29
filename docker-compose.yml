@@ -5,6 +5,12 @@ services:
     image: "postgres:alpine" 
     volumes:
       - .db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
 
   broker:
     image: "rabbitmq:alpine"
