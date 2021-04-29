@@ -2,9 +2,21 @@ import React from 'react';
 import { Card, Form, Row, Col, InputGroup, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExchangeAlt } from '@fortawesome/free-solid-svg-icons';
+function readCookie(name) {
+  var nameEQ = name + "=";
+  var ca = document.cookie.split(';');
+  for(var i=0;i < ca.length;i++) {
+      var c = ca[i];
+      while (c.charAt(0)==' ') c = c.substring(1,c.length);
+      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+  }
+  return null;
+}
+// put the token in header under this field :X-CSRFToken 
 
 const AddNewStudies = () => {
-
+  var csrftoken = readCookie('csrftoken');
+  console.log("CSRF Token:"+csrftoken)
   return (
     <div id="add-new-page">
       <Card className="db-card" id="info">
