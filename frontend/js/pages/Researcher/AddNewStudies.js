@@ -12,7 +12,7 @@ function readCookie(name) {
   }
   return null;
 }
-
+// put the token in header under this field :X-CSRFToken 
 
 const AddNewStudies = () => {
   var csrftoken = readCookie('csrftoken');
