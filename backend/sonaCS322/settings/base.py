@@ -12,7 +12,8 @@ def base_dir_join(*args):
     return os.path.join(BASE_DIR, *args)
 
 
-SITE_ID = 1
+SITE_ID = 4
+
 
 SECURE_HSTS_PRELOAD = True
 
@@ -27,6 +28,8 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 AUTH_USER_MODEL = "users.User"
 
 ALLOWED_HOSTS = []
+
+DEFAULT_AUTO_FIELD='django.db.models.AutoField' 
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -69,7 +72,7 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 
-SITE_ID = 5
+SITE_ID = 3
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'

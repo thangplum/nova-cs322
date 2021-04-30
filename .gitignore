@@ -11,6 +11,7 @@ yarn.lock
 
 #database
 .db/
+db/
 # coverage result
 .coverage
 /coverage/
