@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "description": "sonaCS322 frontend.",
+  "engines": {
+    "node": "14.16.0"
+  },
   "main": "index.js",
   "prettier": "eslint-config-vinta/prettier",
   "scripts": {
