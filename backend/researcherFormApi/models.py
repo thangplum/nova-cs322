@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.postgres.fields import ArrayField
 
 class formResearch(models.Model):
     GENDER_CHOICES=[
@@ -26,8 +26,8 @@ class formResearch(models.Model):
         choices= GENDER_CHOICES,
         default="NA"
     )
-    race = models.CharField(max_length=200)
-    ethinicty = models.CharField(max_length=200)
+    race = ArrayField(models.CharField(max_length=100), blank=True)
+    ethinicty = ArrayField(models.CharField(max_length=100), blank=True)
 
     def __str__(self):
         return self.studyName
