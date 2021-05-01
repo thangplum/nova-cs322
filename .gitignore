@@ -7,6 +7,9 @@
 /mediafiles/*
 __pycache__/
 /.vscode/
+#database
+.db/
+
 
 # coverage result
 .coverage
