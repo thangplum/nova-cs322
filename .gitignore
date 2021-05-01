@@ -7,10 +7,17 @@
 /mediafiles/*
 __pycache__/
 /.vscode/
+<<<<<<< HEAD
 #database
 .db/
 
+=======
+yarn.lock
+>>>>>>> choudry
 
+#database
+.db/
+db/
 # coverage result
 .coverage
 /coverage/

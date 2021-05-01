@@ -1,29 +1,28 @@
-import React, { useEffect, useState } from "react";
-import { Navbar } from 'react-bootstrap';
+import React from "react";
+import { Navbar, Form, Nav } from 'react-bootstrap';
 import { NavLink } from "react-router-dom";
-import Login from '../Login';
-import LogoutDropdown from "./logoutDropdown";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 const NavBar =  () => {
-  const [isLogin, setIsLogin] = useState(false);
-
-  useEffect(() => {
-    const loggedInUser = localStorage.getItem('userInfo');
-    if (loggedInUser) {
-      setIsLogin(true);
-    }
-  }, [])
 
   return (
-    <Navbar>
-      <Navbar.Brand>
-        <NavLink to="/">Fake Nova</NavLink>
-      </Navbar.Brand>
-      {isLogin && <NavLink to="/dashboard">Dashboard</NavLink>}
-      <Navbar.Collapse className="justify-content-end">
-        {isLogin ? <LogoutDropdown setLogin={setIsLogin} /> : <Login setLogin={setIsLogin} />}
-      </Navbar.Collapse>
-
+    <Navbar style={{ marginBottom: "20px" }} expand="lg">
+      <Nav style={{ alignItems: "center" }} className="mr-auto">
+        <Navbar.Brand>
+          <NavLink to="/">Fake Nova</NavLink>
+        </Navbar.Brand>
+        <NavLink style={{ textDecoration: "none", marginRight: "20px" }} to="/dashboard">Dashboard</NavLink>
+      </Nav>
+      
+      <Form inline>
+        {/* <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to={"/logout"}>
+          Logout
+          <FontAwesomeIcon style={{ marginLeft: '5px'}} icon={faSignOutAlt} />
+        </NavLink> */}
+        <a href="logout">Log out</a>
+      </Form>
+      
     </Navbar>
   );
 }

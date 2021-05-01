@@ -7,12 +7,12 @@ import {
   PrescreenResultCard,
   UpcomingAppointCard,
   RecentActivitiesCard,
-} from "../components/ResearcherDashboard";
+} from "../../components/ResearcherDashboard";
 
 const ResearcherDashboard = () => {
 
   return (
-    <div id="researcher-page" className="r-main-container">
+    <div id="researcher-page">
       <Row lg={2}>
         <Col>
           <MyStudiesCard />
