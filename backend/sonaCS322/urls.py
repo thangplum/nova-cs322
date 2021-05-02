@@ -22,6 +22,7 @@ urlpatterns = [
     path('api/', include(router.urls), name="Api"),
     path('accounts/', include('allauth.urls')),
     path('logout', LogoutView.as_view()),
+    path('researcher/logout', LogoutView.as_view()),
     re_path(r'.*', include("common.urls"), name="common"),
     
 ]

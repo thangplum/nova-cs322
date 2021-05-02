@@ -10,7 +10,6 @@ import AddNewStudies from "./AddNewStudies";
 
 const ResearchRoutes = () => {
   const { path } = useRouteMatch();
-  console.log(path)
 
   return (
     <div id="research-routes-page" className="main-container">
