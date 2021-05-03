@@ -14,7 +14,6 @@ def base_dir_join(*args):
 
 SITE_ID = 4
 
-
 SECURE_HSTS_PRELOAD = True
 
 DEBUG = True
@@ -72,8 +71,8 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 
-SITE_ID = 3
 
+SITE_ID = 3
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 

@@ -24,10 +24,10 @@ const ResearchNav =  () => {
             <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to="/">Prescreen results</NavLink>
           </Nav>
           <Form inline>
-            <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to={"/logout"}>
-              Logout
+            <a href="logout">
+              Log out
               <FontAwesomeIcon style={{ marginLeft: '5px'}} icon={faSignOutAlt} />
-            </NavLink>
+            </a>
           </Form>
           
         </Navbar.Collapse>

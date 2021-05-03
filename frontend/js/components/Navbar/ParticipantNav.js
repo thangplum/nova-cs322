@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Navbar, Nav, Form } from 'react-bootstrap';
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,6 +7,7 @@ import { useRouteMatch } from "react-router-dom";
 
 const ParticipantNav =  () => {
   const { path } = useRouteMatch();
+  
 
   return (
     <>
@@ -21,10 +22,10 @@ const ParticipantNav =  () => {
             <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to={`${path}/`}>My schedules</NavLink>
           </Nav>
           <Form inline>
-            <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to={"/logout"}>
-              Logout
+            <a href="logout">
+              Log out
               <FontAwesomeIcon style={{ marginLeft: '5px'}} icon={faSignOutAlt} />
-            </NavLink>
+            </a>
           </Form>
           
         </Navbar.Collapse>
