@@ -12,7 +12,7 @@ const AllStudies = () => {
   useEffect(() => {
     var csrftoken = getCookieToken('csrftoken');
 
-    axios.get('http://localhost:8000/api/form/', {
+    axios.get('/api/form/', {
       headers: {
         'Content-Type': 'application/json',
         'X-Requested-With': 'XMLHttpRequest',

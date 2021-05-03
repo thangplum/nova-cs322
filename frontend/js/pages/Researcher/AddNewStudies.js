@@ -107,7 +107,7 @@ const AddNewStudies = () => {
 
     // Post the value to the server
     // Need to change the url to this (https://prairie-sona.herokuapp.com/api/form/) before push to production
-    axios.post('http://localhost:8000/api/form/', researchInfo, {
+    axios.post('/api/form/', researchInfo, {
       headers: {
         'Content-Type': 'application/json',
         'X-Requested-With': 'XMLHttpRequest',
@@ -117,7 +117,7 @@ const AddNewStudies = () => {
       response => {
         console.log(response.data);
         if(confirm("You have successfully created a new research")) {
-          window.location.href = "http://localhost:8000/researcher";
+          window.location.href = "/researcher";
         }
       }
     ).catch (
