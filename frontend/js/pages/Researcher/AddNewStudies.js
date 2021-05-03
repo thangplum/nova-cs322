@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { Card, Form, Row, Col, InputGroup, Button } from 'react-bootstrap';
 import getCookieToken from "../../utils/getCookieToken";
-import { DateTime } from "luxon";
+// Don't know why this library cannot be found when build so commenting this out for now 
+// and will try to find a fix for this
+// import { DateTime } from '../../node_modules/luxon/build/cjs-browser/luxon';
 import axios from 'axios';
+
 const AddNewStudies = () => {
   var csrftoken = getCookieToken('csrftoken');
   
@@ -81,16 +84,16 @@ const AddNewStudies = () => {
       return ;
     }
     // Verify expire date
-    const formattedDate = DateTime.fromISO(researchInfo.expireDate);
-    const currDate = DateTime.now();
+    // const formattedDate = DateTime.fromISO(researchInfo.expireDate);
+    // const currDate = DateTime.now();
     
-    if (formattedDate.invalid !== null) {
-      alert("Your expire date needs to be a valid date.");
-      return ;
-    } else if (currDate.ts >= formattedDate.ts) {
-      alert("Your expire date should not be in the past.");
-      return ;
-    }
+    // if (formattedDate.invalid !== null) {
+    //   alert("Your expire date needs to be a valid date.");
+    //   return ;
+    // } else if (currDate.ts >= formattedDate.ts) {
+    //   alert("Your expire date should not be in the past.");
+    //   return ;
+    // }
 
     // Verify age
     if (researchInfo.minAge !== "" && (!Number(researchInfo.minAge) || Number(researchInfo.minAge) <= 0)) {
@@ -367,7 +370,7 @@ const AddNewStudies = () => {
                 <Form.Check
                   type="radio"
                   label='Not Hispanic or Latino'
-                  value={"NA"}
+                  value={"Not Hispanic or Latino"}
                   name="ethinicty"
                   onChange={handleChange}
                 />{" "}
@@ -384,11 +387,11 @@ const AddNewStudies = () => {
               <Col sm={10}>
                 <Form.Control name="race" as="select" defaultValue="All" onChange={handleChange}>
                   <option value="">All</option>
-                  <option value="indian">American Indian or Alaska Native</option>
-                  <option value="asian">Asian</option>
-                  <option value="african">Black or African American</option>
-                  <option value="hawaiian">Native Hawaiian or Other Pacific Islander</option>
-                  <option value="white">White</option>
+                  <option value="American Indian">American Indian or Alaska Native</option>
+                  <option value="Asian">Asian</option>
+                  <option value="African American">Black or African American</option>
+                  <option value="Native Hawaiian">Native Hawaiian or Other Pacific Islander</option>
+                  <option value="White">White</option>
                 </Form.Control>
               </Col>
             </Form.Group>

@@ -9,7 +9,7 @@ const signUp = () => {
   const { path } = useRouteMatch();
 
   function handleClick() {
-    history.push(`${path}/current-studies`);
+    history.push(`${path}/all-studies`);
   }
 
   return (
