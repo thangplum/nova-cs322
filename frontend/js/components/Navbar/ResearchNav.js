@@ -9,7 +9,7 @@ const ResearchNav =  () => {
   const {path} = useRouteMatch();
 
   const logout = () => {
-    window.location.href = "http://localhost:8000/logout";
+    window.location.href = "/logout";
   }
 
   return (

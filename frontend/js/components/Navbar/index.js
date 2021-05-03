@@ -7,7 +7,7 @@ import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 const NavBar =  () => {
   const logout = () => {
-    window.location.href = "http://localhost:8000/logout";
+    window.location.href = "/logout";
   }
 
   return (
