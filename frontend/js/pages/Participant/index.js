@@ -6,7 +6,9 @@ import {
 } from "react-router-dom";
 import ParticipantNav from "../../components/Navbar/ParticipantNav";
 import Dashboard from "./Dashboard";
-import CurrentStudies from "./CurrentStudies";
+import MySchedule from "./MySchedule";
+import AllStudies from "./AllStudies";
+import CurrStudy from "./CurrStudy";
 
 const ParticipantRoutes = () => {
   const { path } = useRouteMatch();
@@ -18,8 +20,14 @@ const ParticipantRoutes = () => {
         <Route exact path={`${path}`}>
           <Dashboard />
         </Route>
-        <Route path={`${path}/current-studies`}>
-          <CurrentStudies />
+        <Route exact path={`${path}/my-schedule`}>
+          <MySchedule />
+        </Route>
+        <Route exact path={`${path}/all-studies`}>
+          <AllStudies />
+        </Route>
+        <Route path={`${path}/all-studies/:id`}>
+          <CurrStudy />
         </Route>
       </Switch>
       

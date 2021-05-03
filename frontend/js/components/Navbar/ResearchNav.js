@@ -7,7 +7,10 @@ import { useRouteMatch } from "react-router-dom";
 
 const ResearchNav =  () => {
   const {path} = useRouteMatch();
-  
+
+  const logout = () => {
+    window.location.href = "http://localhost:8000/logout";
+  }
 
   return (
     <>
@@ -24,7 +27,7 @@ const ResearchNav =  () => {
             <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to="/">Prescreen results</NavLink>
           </Nav>
           <Form inline>
-            <a href="logout">
+            <a onClick={logout}>
               Log out
               <FontAwesomeIcon style={{ marginLeft: '5px'}} icon={faSignOutAlt} />
             </a>

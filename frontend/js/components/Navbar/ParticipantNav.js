@@ -7,7 +7,10 @@ import { useRouteMatch } from "react-router-dom";
 
 const ParticipantNav =  () => {
   const { path } = useRouteMatch();
-  
+
+  const logout = () => {
+    window.location.href = "http://localhost:8000/logout";
+  }
 
   return (
     <>
@@ -18,11 +21,11 @@ const ParticipantNav =  () => {
         <Navbar.Collapse>
           <Nav className="mr-auto">
             <NavLink style={{ textDecoration: "none", marginRight: "20px" }} to={`${path}`}><FontAwesomeIcon style={{ marginRight: '5px'}} icon={faHome} /></NavLink>
-            <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to={`${path}/current-studies`}>Available Studies</NavLink>
-            <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to={`${path}/`}>My schedules</NavLink>
+            <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to={`${path}/all-studies`}>Available Studies</NavLink>
+            <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to={`${path}/my-schedule`}>My schedules</NavLink>
           </Nav>
           <Form inline>
-            <a href="logout">
+            <a onClick={logout}>
               Log out
               <FontAwesomeIcon style={{ marginLeft: '5px'}} icon={faSignOutAlt} />
             </a>
