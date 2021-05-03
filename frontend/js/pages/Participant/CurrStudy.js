@@ -11,7 +11,7 @@ const CurrStudy = () => {
   useEffect(() => {
     var csrftoken = getCookieToken('csrftoken');
 
-    axios.get(`http://localhost:8000/api/form/${id}/`, {
+    axios.get(`/api/form/${id}/`, {
       headers: {
         'Content-Type': 'application/json',
         'X-Requested-With': 'XMLHttpRequest',
