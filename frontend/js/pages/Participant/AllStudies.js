@@ -51,10 +51,11 @@ const AllStudies = () => {
                 return (
                   <tr key={study.id}>
                     <td style={{ verticalAlign: "middle" }}>
-                      {study.activeStudy && 
+                      {study.activeStudy ? 
                       <div className="available-button">
                         <Button onClick={() => handleClick(study.id)}>Timeslots available</Button>
-                      </div>
+                      </div> :
+                      <div className="available-button">Timeslot is not available</div>
                       }
                     </td>
                     <td>
@@ -70,7 +71,13 @@ const AllStudies = () => {
                               "All"}
                       </div>
                       <div>
-                        Race: {study.race.length > 0 ? study.race.join() : "All"}
+                        Gender: {study.gender === "" ? "All" :
+                                 study.gender === "M" ? "Male" : 
+                                 study.gender === "F" ? "Female" :
+                                 "Not specified"}
+                      </div>
+                      <div>
+                        Race: {study.race.length > 0 ? study.race.join(", ") : "All"}
                       </div>
                       <div>
                         Ethnicity: {study.ethinicty.length > 0 ? study.ethinicty.join() : "All"}

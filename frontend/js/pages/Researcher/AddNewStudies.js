@@ -9,6 +9,7 @@ import axios from 'axios';
 const AddNewStudies = () => {
   var csrftoken = getCookieToken('csrftoken');
   
+  const [isClicked, setIsClicked] = useState(false);
   const [researchInfo, setResearchInfo] = useState({
     studyName: "",
     briefAbstract: "",
@@ -28,6 +29,16 @@ const AddNewStudies = () => {
     ethinicty: []
     // gender: Male: M, Feamale: F, Not Sprcified: NA
   })
+
+  const handleRemoveItem = (e) => {
+    const name = e.target.getAttribute("name");
+    console.log(name);
+    let newRace = researchInfo.race.filter(item => item !== name);
+    setResearchInfo({
+      ...researchInfo,
+      race: newRace
+    });
+  };
 
   function handleChange(evt) {
     let value = evt.target.value;
@@ -49,6 +60,7 @@ const AddNewStudies = () => {
       });
     }
     
+    console.log(researchInfo)
   }
 
   const handleSubmit = (event) => {
@@ -110,22 +122,22 @@ const AddNewStudies = () => {
     // Post the value to the server
     // Need to change the url to this (https://prairie-sona.herokuapp.com/api/form/) before push to production
 
-    // axios.post('/api/form/', researchInfo, {
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'X-Requested-With': 'XMLHttpRequest',
-    //     'X-CSRFToken': csrftoken
-    //   }
-    // }).then (
-    //   response => {
-    //     console.log(response.data);
-    //     if(confirm("You have successfully created a new research")) {
-    //       window.location.href = "/researcher";
-    //     }
-    //   }
-    // ).catch (
-    //   error => console.log(error)
-    // )
+    axios.post('/api/form/', researchInfo, {
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRFToken': csrftoken
+      }
+    }).then (
+      response => {
+        console.log(response.data);
+        if(confirm("You have successfully created a new research")) {
+          window.location.href = "/researcher";
+        }
+      }
+    ).catch (
+      error => console.log(error)
+    )
   }
 
   return (
@@ -388,21 +400,40 @@ const AddNewStudies = () => {
                 <Form.Text>(Leave blank if allow all)</Form.Text>
               </Col>
               <Col sm={10}>
-                <Form.Control name="race" as="select" defaultValue="All" onChange={handleChange}>
-                  <option value="">All</option>
-                  <option value="American Indian">American Indian or Alaska Native</option>
-                  <option value="Asian">Asian</option>
-                  <option value="African American">Black or African American</option>
-                  <option value="Native Hawaiian">Native Hawaiian or Other Pacific Islander</option>
-                  <option value="White">White</option>
+                <Form.Control name="race" as="select" onChange={handleChange} multiple>
+                  <option value="American Indian" disabled={researchInfo.race.includes("American Indian")}>
+                    American Indian or Alaska Native
+                  </option>
+                  <option value="Asian" disabled={researchInfo.race.includes("Asian")}>
+                    Asian
+                  </option>
+                  <option value="African American" disabled={researchInfo.race.includes("African American")}>
+                    Black or African American
+                  </option>
+                  <option value="Native Hawaiian" disabled={researchInfo.race.includes("Native Hawaiian")}>
+                    Native Hawaiian or Other Pacific Islander
+                  </option>
+                  <option value="White" disabled={researchInfo.race.includes("White")}>
+                    White
+                  </option>
                 </Form.Control>
+                <div style={{ marginTop: "10px" }}>{researchInfo.race.map((race) => {
+                  return ( 
+                    <Button key={race} style={{ marginRight: "5px" }}>
+                      {race}
+                      <span className="close" name={race} aria-hidden="true" onClick={handleRemoveItem}>&times;</span>
+                    </Button>
+                  );
+                })}</div>
               </Col>
             </Form.Group>
 
             {/* Submit button */}
             <Form.Group as={Row} controlId="researchSubmit">
               <Col md={{ span: 10, offset: 2 }}>
-                <Button type="submit" variant="success" size="lg">Add this study</Button>
+                <Button type="submit" variant="success" size="lg">
+                  Add this study
+                </Button>
               </Col>
             </Form.Group>
           </Form>
