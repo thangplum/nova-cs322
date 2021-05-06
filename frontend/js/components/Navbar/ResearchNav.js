@@ -25,6 +25,7 @@ const ResearchNav =  () => {
             <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to="/">All studies</NavLink>
             <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to={`${path}/add-new`}>Add new study</NavLink>
             <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to="/">Prescreen results</NavLink>
+            <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to="/dashboard">Dashboard</NavLink>
           </Nav>
           <Form inline>
             <a onClick={logout}>

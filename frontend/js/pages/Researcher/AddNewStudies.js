@@ -105,24 +105,27 @@ const AddNewStudies = () => {
       return ;
     }
 
+    console.log(researchInfo);
+
     // Post the value to the server
     // Need to change the url to this (https://prairie-sona.herokuapp.com/api/form/) before push to production
-    axios.post('http://localhost:8000/api/form/', researchInfo, {
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Requested-With': 'XMLHttpRequest',
-        'X-CSRFToken': csrftoken
-      }
-    }).then (
-      response => {
-        console.log(response.data);
-        if(confirm("You have successfully created a new research")) {
-          window.location.href = "http://localhost:8000/researcher";
-        }
-      }
-    ).catch (
-      error => console.log(error)
-    )
+
+    // axios.post('/api/form/', researchInfo, {
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     'X-Requested-With': 'XMLHttpRequest',
+    //     'X-CSRFToken': csrftoken
+    //   }
+    // }).then (
+    //   response => {
+    //     console.log(response.data);
+    //     if(confirm("You have successfully created a new research")) {
+    //       window.location.href = "/researcher";
+    //     }
+    //   }
+    // ).catch (
+    //   error => console.log(error)
+    // )
   }
 
   return (
@@ -304,7 +307,7 @@ const AddNewStudies = () => {
                 <Form.Text>(Leave blank if allow all)</Form.Text>
               </Col>
               <Col sm={10}>
-                <Form.Control name="minAge" type="text" value={researchInfo.minAge} onChange={handleChange} />
+                <Form.Control name="minAge" type="text" value={researchInfo.minAge === "0" ? "" : researchInfo.minAge} onChange={handleChange} />
               </Col>
             </Form.Group>
             {/* Maximum age select */}
@@ -316,7 +319,7 @@ const AddNewStudies = () => {
                 <Form.Text>(Leave blank if allow all)</Form.Text>
               </Col>
               <Col sm={10}>
-                <Form.Control name="maxAge" type="text" value={researchInfo.maxAge} onChange={handleChange} />
+                <Form.Control name="maxAge" type="text" value={researchInfo.maxAge === "0" ? "" : researchInfo.maxAge} onChange={handleChange} />
               </Col>
             </Form.Group>
             {/* Gender select */}
