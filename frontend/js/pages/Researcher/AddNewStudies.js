@@ -3,13 +3,12 @@ import { Card, Form, Row, Col, InputGroup, Button } from 'react-bootstrap';
 import getCookieToken from "../../utils/getCookieToken";
 // Don't know why this library cannot be found when build so commenting this out for now 
 // and will try to find a fix for this
-// import { DateTime } from '../../node_modules/luxon/build/cjs-browser/luxon';
+import { DateTime } from 'luxon';
 import axios from 'axios';
 
 const AddNewStudies = () => {
   var csrftoken = getCookieToken('csrftoken');
   
-  const [isClicked, setIsClicked] = useState(false);
   const [researchInfo, setResearchInfo] = useState({
     studyName: "",
     briefAbstract: "",
@@ -49,34 +48,42 @@ const AddNewStudies = () => {
     }
     // Since ethinicity and race are lists
     if (evt.target.name === "ethinicty" || evt.target.name === "race") {
-      setResearchInfo({
-        ...researchInfo,
-        [evt.target.name]: [...researchInfo[evt.target.name], value]
-      });
+      if (!researchInfo[evt.target.name].includes(value)) {
+        setResearchInfo({
+          ...researchInfo,
+          [evt.target.name]: [...researchInfo[evt.target.name], value]
+        });
+      }
+     
     } else {
       setResearchInfo({
         ...researchInfo,
         [evt.target.name]: value
       });
     }
-    
-    console.log(researchInfo)
   }
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(researchInfo);
+   
     // Check if research name is empty
     if (researchInfo.studyName == "") {
       alert("You need a name for your research.");
       return ;
+    } else if (researchInfo.studyName.length > 100) {
+      alert("Your research name is too long, you need another name for your research.");
+      return ;
     }
+
     // Check if the duration is empty or is not a number
     if (researchInfo.duration == "") {
       alert("You need to specify how long is your session with participants.");
       return ;
     } else if (!Number(researchInfo.duration)) {
       alert("Your duration needs to be a number.");
+      return ;
+    } else if (researchInfo.duration.length > 3) {
+      alert("Your appointment is too long.");
       return ;
     }
     // Check if the credit is empty and cannot be divisible by 0.5
@@ -89,23 +96,29 @@ const AddNewStudies = () => {
     } else if (researchInfo.creditsResearch % 0.5 != 0) {
       alert("Your credit needs to be divisible by 0.5");
       return ;
+    } else if (researchInfo.creditsResearch.length > 4) {
+      alert("Your credit is too long.");
+      return ;
     }
     // Check if researcher name is empty
-    if (researchInfo.researcher == "") {
+    if (researchInfo.reseacher == "") {
       alert("You need a researcher for your research.");
+      return ;
+    } else if (researchInfo.reseacher.length > 100) {
+      alert("Your researcher name is too long.");
       return ;
     }
     // Verify expire date
-    // const formattedDate = DateTime.fromISO(researchInfo.expireDate);
-    // const currDate = DateTime.now();
+    const formattedDate = DateTime.fromISO(researchInfo.expireDate);
+    const currDate = DateTime.now();
     
-    // if (formattedDate.invalid !== null) {
-    //   alert("Your expire date needs to be a valid date.");
-    //   return ;
-    // } else if (currDate.ts >= formattedDate.ts) {
-    //   alert("Your expire date should not be in the past.");
-    //   return ;
-    // }
+    if (formattedDate.invalid !== null) {
+      alert("Your expire date needs to be a valid date.");
+      return ;
+    } else if (currDate.ts >= formattedDate.ts) {
+      alert("Your expire date should not be in the past.");
+      return ;
+    }
 
     // Verify age
     if (researchInfo.minAge !== "" && (!Number(researchInfo.minAge) || Number(researchInfo.minAge) <= 0)) {
@@ -116,8 +129,6 @@ const AddNewStudies = () => {
       alert("Your maximum age must be a valid number.");
       return ;
     }
-
-    console.log(researchInfo);
 
     // Post the value to the server
     // Need to change the url to this (https://prairie-sona.herokuapp.com/api/form/) before push to production
@@ -343,54 +354,42 @@ const AddNewStudies = () => {
                 <Form.Text>(Leave blank if allow all)</Form.Text>
               </Col>
               <Col sm={10}>
-                <Form.Check 
-                  type="radio"
-                  label='Male'
-                  value={"M"}
-                  name="gender"
-                  onChange={handleChange}
-                />{" "}
-                <Form.Check
-                  type="radio"
-                  label='Female'
-                  value={"F"}
-                  name="gender"
-                  onChange={handleChange}
-                />{" "}
-                <Form.Check
-                  type="radio"
-                  label='Not specifed'
-                  value={"NA"}
-                  name="gender"
-                  onChange={handleChange}
-                />{" "}
+                <Form.Check>
+                  <Form.Check.Input type="radio" name="gender" id="male" onChange={handleChange} value={"M"} />
+                  <Form.Check.Label htmlFor="male" name="gender" onChange={handleChange} value={"M"}>Male</Form.Check.Label>
+                </Form.Check>
+                <Form.Check>
+                  <Form.Check.Input type="radio" name="gender" id="female" onChange={handleChange} value={"F"} />
+                  <Form.Check.Label htmlFor="female" name="gender" onChange={handleChange} value={"F"}>Female</Form.Check.Label>
+                </Form.Check>
+                <Form.Check>
+                  <Form.Check.Input type="radio" name="gender" id="na" onChange={handleChange} value={"NA"} />
+                  <Form.Check.Label htmlFor="na" name="gender" onChange={handleChange} value={"NA"}>Not specified</Form.Check.Label>
+                </Form.Check>
               </Col>
             </Form.Group>
             {/* Ethinicty select */}
-            <Form.Group as={Row} controlId="studyName">
-              <Col sm={2}>
-                <Form.Label>
-                  Ethinicty
-                </Form.Label>
-                <Form.Text>(Leave blank if allow all)</Form.Text>
-              </Col>
-              <Col sm={10}>
-                <Form.Check 
-                  type="radio"
-                  label='Hispanic or Latino'
-                  value={"Hispanic"}
-                  name="ethinicty"
-                  onChange={handleChange}
-                />{" "}
-                <Form.Check
-                  type="radio"
-                  label='Not Hispanic or Latino'
-                  value={"Not Hispanic or Latino"}
-                  name="ethinicty"
-                  onChange={handleChange}
-                />{" "}
-              </Col>
-            </Form.Group>
+            <fieldset>
+              <Form.Group as={Row}>
+                <Col sm={2}>
+                  <Form.Label >
+                    Ethinicty
+                  </Form.Label>
+                  <Form.Text>(Leave blank if allow all)</Form.Text>
+                </Col>
+                <Col sm={10}>
+                  <Form.Check>
+                    <Form.Check.Input type="radio" name="ethinicty" id="hispanic" onChange={handleChange} value={"Hispanic"} />
+                    <Form.Check.Label htmlFor="hispanic" name="ethinicty" onChange={handleChange} value={"Hispanic"}>Hispanic or Latino</Form.Check.Label>
+                  </Form.Check>
+                  <Form.Check>
+                    <Form.Check.Input type="radio" name="ethinicty" id="not-hispanic" onChange={handleChange} value={"Not Hispanic or Latino"} />
+                    <Form.Check.Label htmlFor="not-hispanic" name="ethinicty" onChange={handleChange} value={"Not Hispanic or Latino"}>Not Hispanic or Latino</Form.Check.Label>
+                  </Form.Check>
+                </Col>
+              </Form.Group>
+            </fieldset>
+            
             {/* race select */}
             <Form.Group as={Row} controlId="studyName">
               <Col sm={2}>
@@ -421,7 +420,7 @@ const AddNewStudies = () => {
                   return ( 
                     <Button key={race} style={{ marginRight: "5px" }}>
                       {race}
-                      <span className="close" name={race} aria-hidden="true" onClick={handleRemoveItem}>&times;</span>
+                      <span className="close-btn" name={race} aria-hidden="true" onClick={handleRemoveItem}>&times;</span>
                     </Button>
                   );
                 })}</div>
