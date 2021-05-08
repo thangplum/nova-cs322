@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     "django.contrib.admin",
     "oauth_app",
     "researcherFormApi.apps.ResearcherformapiConfig",
+    "course",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",

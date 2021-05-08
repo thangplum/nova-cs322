@@ -7,5 +7,5 @@ class formResearchSerializer(serializers.ModelSerializer):
     class Meta:
         model = formResearch
         fields = '__all__'
-    ethinicty = serializers.ListField()
     race = serializers.ListField()
+    gender = serializers.ListField()
