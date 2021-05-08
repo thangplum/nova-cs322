@@ -23,7 +23,6 @@ db/
 *.dump
 
 # npm
-package-lock.json
 node_modules/
 npm-debug.log
 
@@ -50,5 +49,3 @@ spritesmith.scss
 
 # templated email
 tmp_email/
-backend/sonaCS322/settings/base.py
-backend/researcherFormApi/migrations/0003_auto_20210427_2237.py
