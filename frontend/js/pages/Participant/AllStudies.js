@@ -81,7 +81,7 @@ const AllStudies = () => {
                     </td>
                     <td>
                       <div style={{ fontWeight: "600", fontSize: "1.5rem"}}>{study.studyName}</div>
-                      <div>{study.reseacher}</div>
+                      <div>{study.researcher}</div>
                       <div>{study.creditsResearch} credit(s)</div>
                     </td>
                     <td>
@@ -92,16 +92,13 @@ const AllStudies = () => {
                               "All"}
                       </div>
                       <div>
-                        Gender: {study.gender === "" ? "All" :
-                                 study.gender === "M" ? "Male" : 
-                                 study.gender === "F" ? "Female" :
-                                 "Not specified"}
+                        Gender: {study.gender.length > 0 ? study.gender.join(", ") : "All"}
                       </div>
                       <div>
                         Race: {study.race.length > 0 ? study.race.join(", ") : "All"}
                       </div>
                       <div>
-                        Ethnicity: {study.ethinicty.length > 0 ? study.ethinicty.join() : "All"}
+                        Ethnicity: {study.ethnicity !== "" ? study.ethnicity : "All"}
                       </div>
                     </td>
                   </tr>

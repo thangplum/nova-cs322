@@ -15,7 +15,7 @@ const AddNewStudies = () => {
     detailedDescription: "",
     duration: "",
     creditsResearch: "",
-    reseacher: "", // Typo on backend
+    researcher: "", 
     instructor: "1",
     approvalCode: "",
     expireDate: "", //yyyy-mm-dd
@@ -23,31 +23,31 @@ const AddNewStudies = () => {
     activeStudy: true,
     minAge: "",
     maxAge: "",
-    gender: "",
+    gender: [],
     race: [],
-    ethinicty: []
+    ethnicity: ""
     // gender: Male: M, Feamale: F, Not Sprcified: NA
   })
 
   const handleRemoveItem = (e) => {
     const name = e.target.getAttribute("name");
-    console.log(name);
-    let newRace = researchInfo.race.filter(item => item !== name);
+    const val = e.target.getAttribute("id");
+    let newVal = researchInfo[name].filter(item => item !== val);
     setResearchInfo({
       ...researchInfo,
-      race: newRace
+      [name]: newVal
     });
   };
 
   function handleChange(evt) {
     let value = evt.target.value;
- 
+    
     if (value && evt.target.name === "activeStudy" && typeof value === "string") {
       if (value === "true") value = true;
       if (value === "false") value = false;
     }
     // Since ethinicity and race are lists
-    if (evt.target.name === "ethinicty" || evt.target.name === "race") {
+    if (evt.target.name === "race" || evt.target.name === "gender") {
       if (!researchInfo[evt.target.name].includes(value)) {
         setResearchInfo({
           ...researchInfo,
@@ -101,10 +101,10 @@ const AddNewStudies = () => {
       return ;
     }
     // Check if researcher name is empty
-    if (researchInfo.reseacher == "") {
+    if (researchInfo.researcher == "") {
       alert("You need a researcher for your research.");
       return ;
-    } else if (researchInfo.reseacher.length > 100) {
+    } else if (researchInfo.researcher.length > 100) {
       alert("Your researcher name is too long.");
       return ;
     }
@@ -234,7 +234,7 @@ const AddNewStudies = () => {
             <Form.Group as={Row} controlId="researchResearcher">
               <Form.Label column sm={2}>Researcher</Form.Label>
               <Col sm={10}>
-                <Form.Control type="text" name="reseacher" onChange={handleChange} value={researchInfo.reseacher} />
+                <Form.Control type="text" name="researcher" onChange={handleChange} value={researchInfo.reseacher} />
               </Col>
               {/* Add twotable research style like Sona later */}
               {/* <Col sm={2} style={{ textAlign: "center" }}>
@@ -246,7 +246,7 @@ const AddNewStudies = () => {
                 </Form.Control>
               </Col> */}
             </Form.Group>
-            <Form.Group as={Row} controlId="studyAbstract">
+            <Form.Group as={Row} controlId="studyInstructor">
               <Form.Label column sm={2}>
                 Instructor
               </Form.Label>
@@ -260,7 +260,7 @@ const AddNewStudies = () => {
                 </Form.Control>
               </Col>
             </Form.Group>
-            <Form.Group as={Row} controlId="studyName">
+            <Form.Group as={Row} controlId="studyApprovalCode">
               <Form.Label column sm={2}>
                 Approval Code
               </Form.Label>
@@ -268,7 +268,7 @@ const AddNewStudies = () => {
                 <Form.Control type="text" name="approvalCode" value={researchInfo.approvalCode} onChange={handleChange} />
               </Col>
             </Form.Group>
-            <Form.Group as={Row} controlId="studyName">
+            <Form.Group as={Row} controlId="studyExpireDate">
               <Col sm={2}>
                 <Form.Label>
                   Approval Expiration Date
@@ -279,7 +279,7 @@ const AddNewStudies = () => {
                 <Form.Control type="text" name="expireDate" value={researchInfo.expireDate} onChange={handleChange} />
               </Col>
             </Form.Group>
-            <Form.Group as={Row} controlId="studyName">
+            <Form.Group as={Row} controlId="studyIsApproved">
               <Form.Label column sm={2}>
                 Approved?
               </Form.Label>
@@ -287,7 +287,7 @@ const AddNewStudies = () => {
                 <Form.Text>The study is approved</Form.Text>
               </Col>
             </Form.Group>
-            <Form.Group as={Row} controlId="researchIsActive">
+            <Form.Group as={Row} controlId="studyIsActive">
               <Form.Label column sm={2}>
                 Active Study?
               </Form.Label>
@@ -354,41 +354,49 @@ const AddNewStudies = () => {
                 <Form.Text>(Leave blank if allow all)</Form.Text>
               </Col>
               <Col sm={10}>
-                <Form.Check>
-                  <Form.Check.Input type="radio" name="gender" id="male" onChange={handleChange} value={"M"} />
-                  <Form.Check.Label htmlFor="male" name="gender" onChange={handleChange} value={"M"}>Male</Form.Check.Label>
-                </Form.Check>
-                <Form.Check>
-                  <Form.Check.Input type="radio" name="gender" id="female" onChange={handleChange} value={"F"} />
-                  <Form.Check.Label htmlFor="female" name="gender" onChange={handleChange} value={"F"}>Female</Form.Check.Label>
-                </Form.Check>
-                <Form.Check>
-                  <Form.Check.Input type="radio" name="gender" id="na" onChange={handleChange} value={"NA"} />
-                  <Form.Check.Label htmlFor="na" name="gender" onChange={handleChange} value={"NA"}>Not specified</Form.Check.Label>
-                </Form.Check>
+                <Form.Control name="gender" as="select" htmlSize={3} onChange={handleChange} multiple>
+                  <option value="Male" disabled={researchInfo.gender.includes("Male")}>
+                    Male
+                  </option>
+                  <option value="Female" disabled={researchInfo.gender.includes("Female")}>
+                    Female
+                  </option>
+                  <option value="Not specified" disabled={researchInfo.gender.includes("Not specified")}>
+                    Not specified
+                  </option>
+                </Form.Control>
+                <div style={{ marginTop: "10px" }}>
+                  {researchInfo.gender.map((gender) => {
+                    return ( 
+                      <Button key={gender} style={{ marginRight: "5px" }}>
+                        {gender}
+                        <span className="close-btn" id={gender} name="gender" aria-hidden="true" onClick={handleRemoveItem}>&times;</span>
+                      </Button>
+                    );
+                  })}
+                </div>
               </Col>
             </Form.Group>
             {/* Ethinicty select */}
-            <fieldset>
-              <Form.Group as={Row}>
-                <Col sm={2}>
-                  <Form.Label >
-                    Ethinicty
-                  </Form.Label>
-                  <Form.Text>(Leave blank if allow all)</Form.Text>
-                </Col>
-                <Col sm={10}>
-                  <Form.Check>
-                    <Form.Check.Input type="radio" name="ethinicty" id="hispanic" onChange={handleChange} value={"Hispanic"} />
-                    <Form.Check.Label htmlFor="hispanic" name="ethinicty" onChange={handleChange} value={"Hispanic"}>Hispanic or Latino</Form.Check.Label>
-                  </Form.Check>
-                  <Form.Check>
-                    <Form.Check.Input type="radio" name="ethinicty" id="not-hispanic" onChange={handleChange} value={"Not Hispanic or Latino"} />
-                    <Form.Check.Label htmlFor="not-hispanic" name="ethinicty" onChange={handleChange} value={"Not Hispanic or Latino"}>Not Hispanic or Latino</Form.Check.Label>
-                  </Form.Check>
-                </Col>
-              </Form.Group>
-            </fieldset>
+            <Form.Group as={Row}>
+              <Col sm={2}>
+                <Form.Label >
+                  Ethinicty
+                </Form.Label>
+                <Form.Text>(Leave blank if allow all)</Form.Text>
+              </Col>
+              <Col sm={10}>
+                <Form.Check>
+                  <Form.Check.Input type="radio" name="ethnicity" id="hispanic" onChange={handleChange} value={"Hispanic"} />
+                  <Form.Check.Label htmlFor="hispanic" name="ethnicity" onChange={handleChange} value={"Hispanic"}>Hispanic or Latino</Form.Check.Label>
+                </Form.Check>
+                <Form.Check>
+                  <Form.Check.Input type="radio" name="ethnicity" id="not-hispanic" onChange={handleChange} value={"Not Hispanic or Latino"} />
+                  <Form.Check.Label htmlFor="not-hispanic" name="ethnicity" onChange={handleChange} value={"Not Hispanic or Latino"}>Not Hispanic or Latino</Form.Check.Label>
+                </Form.Check>
+              </Col>
+            </Form.Group>
+            
             
             {/* race select */}
             <Form.Group as={Row} controlId="studyName">
@@ -416,14 +424,16 @@ const AddNewStudies = () => {
                     White
                   </option>
                 </Form.Control>
-                <div style={{ marginTop: "10px" }}>{researchInfo.race.map((race) => {
-                  return ( 
-                    <Button key={race} style={{ marginRight: "5px" }}>
-                      {race}
-                      <span className="close-btn" name={race} aria-hidden="true" onClick={handleRemoveItem}>&times;</span>
-                    </Button>
-                  );
-                })}</div>
+                <div style={{ marginTop: "10px" }}>
+                  {researchInfo.race.map((race) => {
+                    return ( 
+                      <Button key={race} style={{ marginRight: "5px" }}>
+                        {race}
+                        <span className="close-btn" id={race} name="race" aria-hidden="true" onClick={handleRemoveItem}>&times;</span>
+                      </Button>
+                    );
+                  })}
+                </div>
               </Col>
             </Form.Group>
 
