@@ -26,7 +26,7 @@ const AllStudies = () => {
   const handleNavigate = async (pageNumber) => {
     var csrftoken = getCookieToken('csrftoken');
     setCurrPage(pageNumber);
-    let next = `http://localhost:8000/api/form/?limit=10&offset=${(pageNumber - 1) * 10}`;
+    let next = `/api/form/?limit=10&offset=${(pageNumber - 1) * 10}`;
     
     try {
       const res = await axios.get(next, {
