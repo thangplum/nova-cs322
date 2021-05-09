@@ -23,6 +23,7 @@ const ParticipantNav =  () => {
             <NavLink style={{ textDecoration: "none", marginRight: "20px" }} to={`${path}`}><FontAwesomeIcon style={{ marginRight: '5px'}} icon={faHome} /></NavLink>
             <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to={`${path}/all-studies`}>Available Studies</NavLink>
             <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to={`${path}/my-schedule`}>My schedules</NavLink>
+            <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to="/dashboard">Dashboard</NavLink>
           </Nav>
           <Form inline>
             <a onClick={logout}>

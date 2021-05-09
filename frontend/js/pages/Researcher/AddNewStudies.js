@@ -3,7 +3,7 @@ import { Card, Form, Row, Col, InputGroup, Button } from 'react-bootstrap';
 import getCookieToken from "../../utils/getCookieToken";
 // Don't know why this library cannot be found when build so commenting this out for now 
 // and will try to find a fix for this
-// import { DateTime } from '../../node_modules/luxon/build/cjs-browser/luxon';
+import { DateTime } from 'luxon';
 import axios from 'axios';
 
 const AddNewStudies = () => {
@@ -15,7 +15,7 @@ const AddNewStudies = () => {
     detailedDescription: "",
     duration: "",
     creditsResearch: "",
-    reseacher: "", // Typo on backend
+    researcher: "", 
     instructor: "1",
     approvalCode: "",
     expireDate: "", //yyyy-mm-dd
@@ -23,48 +23,67 @@ const AddNewStudies = () => {
     activeStudy: true,
     minAge: "",
     maxAge: "",
-    gender: "",
+    gender: [],
     race: [],
-    ethinicty: []
+    ethnicity: ""
     // gender: Male: M, Feamale: F, Not Sprcified: NA
   })
 
+  const handleRemoveItem = (e) => {
+    const name = e.target.getAttribute("name");
+    const val = e.target.getAttribute("id");
+    let newVal = researchInfo[name].filter(item => item !== val);
+    setResearchInfo({
+      ...researchInfo,
+      [name]: newVal
+    });
+  };
+
   function handleChange(evt) {
     let value = evt.target.value;
- 
+    
     if (value && evt.target.name === "activeStudy" && typeof value === "string") {
       if (value === "true") value = true;
       if (value === "false") value = false;
     }
     // Since ethinicity and race are lists
-    if (evt.target.name === "ethinicty" || evt.target.name === "race") {
-      setResearchInfo({
-        ...researchInfo,
-        [evt.target.name]: [...researchInfo[evt.target.name], value]
-      });
+    if (evt.target.name === "race" || evt.target.name === "gender") {
+      if (!researchInfo[evt.target.name].includes(value)) {
+        setResearchInfo({
+          ...researchInfo,
+          [evt.target.name]: [...researchInfo[evt.target.name], value]
+        });
+      }
+     
     } else {
       setResearchInfo({
         ...researchInfo,
         [evt.target.name]: value
       });
     }
-    
   }
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(researchInfo);
+   
     // Check if research name is empty
     if (researchInfo.studyName == "") {
       alert("You need a name for your research.");
       return ;
+    } else if (researchInfo.studyName.length > 100) {
+      alert("Your research name is too long, you need another name for your research.");
+      return ;
     }
+
     // Check if the duration is empty or is not a number
     if (researchInfo.duration == "") {
       alert("You need to specify how long is your session with participants.");
       return ;
     } else if (!Number(researchInfo.duration)) {
       alert("Your duration needs to be a number.");
+      return ;
+    } else if (researchInfo.duration.length > 3) {
+      alert("Your appointment is too long.");
       return ;
     }
     // Check if the credit is empty and cannot be divisible by 0.5
@@ -77,23 +96,29 @@ const AddNewStudies = () => {
     } else if (researchInfo.creditsResearch % 0.5 != 0) {
       alert("Your credit needs to be divisible by 0.5");
       return ;
+    } else if (researchInfo.creditsResearch.length > 4) {
+      alert("Your credit is too long.");
+      return ;
     }
     // Check if researcher name is empty
     if (researchInfo.researcher == "") {
       alert("You need a researcher for your research.");
       return ;
+    } else if (researchInfo.researcher.length > 100) {
+      alert("Your researcher name is too long.");
+      return ;
     }
     // Verify expire date
-    // const formattedDate = DateTime.fromISO(researchInfo.expireDate);
-    // const currDate = DateTime.now();
+    const formattedDate = DateTime.fromISO(researchInfo.expireDate);
+    const currDate = DateTime.now();
     
-    // if (formattedDate.invalid !== null) {
-    //   alert("Your expire date needs to be a valid date.");
-    //   return ;
-    // } else if (currDate.ts >= formattedDate.ts) {
-    //   alert("Your expire date should not be in the past.");
-    //   return ;
-    // }
+    if (formattedDate.invalid !== null) {
+      alert("Your expire date needs to be a valid date.");
+      return ;
+    } else if (currDate.ts >= formattedDate.ts) {
+      alert("Your expire date should not be in the past.");
+      return ;
+    }
 
     // Verify age
     if (researchInfo.minAge !== "" && (!Number(researchInfo.minAge) || Number(researchInfo.minAge) <= 0)) {
@@ -208,7 +233,7 @@ const AddNewStudies = () => {
             <Form.Group as={Row} controlId="researchResearcher">
               <Form.Label column sm={2}>Researcher</Form.Label>
               <Col sm={10}>
-                <Form.Control type="text" name="reseacher" onChange={handleChange} value={researchInfo.reseacher} />
+                <Form.Control type="text" name="researcher" onChange={handleChange} value={researchInfo.reseacher} />
               </Col>
               {/* Add twotable research style like Sona later */}
               {/* <Col sm={2} style={{ textAlign: "center" }}>
@@ -220,7 +245,7 @@ const AddNewStudies = () => {
                 </Form.Control>
               </Col> */}
             </Form.Group>
-            <Form.Group as={Row} controlId="studyAbstract">
+            <Form.Group as={Row} controlId="studyInstructor">
               <Form.Label column sm={2}>
                 Instructor
               </Form.Label>
@@ -234,7 +259,7 @@ const AddNewStudies = () => {
                 </Form.Control>
               </Col>
             </Form.Group>
-            <Form.Group as={Row} controlId="studyName">
+            <Form.Group as={Row} controlId="studyApprovalCode">
               <Form.Label column sm={2}>
                 Approval Code
               </Form.Label>
@@ -242,7 +267,7 @@ const AddNewStudies = () => {
                 <Form.Control type="text" name="approvalCode" value={researchInfo.approvalCode} onChange={handleChange} />
               </Col>
             </Form.Group>
-            <Form.Group as={Row} controlId="studyName">
+            <Form.Group as={Row} controlId="studyExpireDate">
               <Col sm={2}>
                 <Form.Label>
                   Approval Expiration Date
@@ -253,7 +278,7 @@ const AddNewStudies = () => {
                 <Form.Control type="text" name="expireDate" value={researchInfo.expireDate} onChange={handleChange} />
               </Col>
             </Form.Group>
-            <Form.Group as={Row} controlId="studyName">
+            <Form.Group as={Row} controlId="studyIsApproved">
               <Form.Label column sm={2}>
                 Approved?
               </Form.Label>
@@ -261,7 +286,7 @@ const AddNewStudies = () => {
                 <Form.Text>The study is approved</Form.Text>
               </Col>
             </Form.Group>
-            <Form.Group as={Row} controlId="researchIsActive">
+            <Form.Group as={Row} controlId="studyIsActive">
               <Form.Label column sm={2}>
                 Active Study?
               </Form.Label>
@@ -304,7 +329,7 @@ const AddNewStudies = () => {
                 <Form.Text>(Leave blank if allow all)</Form.Text>
               </Col>
               <Col sm={10}>
-                <Form.Control name="minAge" type="text" value={researchInfo.minAge} onChange={handleChange} />
+                <Form.Control name="minAge" type="text" value={researchInfo.minAge === "0" ? "" : researchInfo.minAge} onChange={handleChange} />
               </Col>
             </Form.Group>
             {/* Maximum age select */}
@@ -316,7 +341,7 @@ const AddNewStudies = () => {
                 <Form.Text>(Leave blank if allow all)</Form.Text>
               </Col>
               <Col sm={10}>
-                <Form.Control name="maxAge" type="text" value={researchInfo.maxAge} onChange={handleChange} />
+                <Form.Control name="maxAge" type="text" value={researchInfo.maxAge === "0" ? "" : researchInfo.maxAge} onChange={handleChange} />
               </Col>
             </Form.Group>
             {/* Gender select */}
@@ -328,54 +353,50 @@ const AddNewStudies = () => {
                 <Form.Text>(Leave blank if allow all)</Form.Text>
               </Col>
               <Col sm={10}>
-                <Form.Check 
-                  type="radio"
-                  label='Male'
-                  value={"M"}
-                  name="gender"
-                  onChange={handleChange}
-                />{" "}
-                <Form.Check
-                  type="radio"
-                  label='Female'
-                  value={"F"}
-                  name="gender"
-                  onChange={handleChange}
-                />{" "}
-                <Form.Check
-                  type="radio"
-                  label='Not specifed'
-                  value={"NA"}
-                  name="gender"
-                  onChange={handleChange}
-                />{" "}
+                <Form.Control name="gender" as="select" htmlSize={3} onChange={handleChange} multiple>
+                  <option value="Male" disabled={researchInfo.gender.includes("Male")}>
+                    Male
+                  </option>
+                  <option value="Female" disabled={researchInfo.gender.includes("Female")}>
+                    Female
+                  </option>
+                  <option value="Not specified" disabled={researchInfo.gender.includes("Not specified")}>
+                    Not specified
+                  </option>
+                </Form.Control>
+                <div style={{ marginTop: "10px" }}>
+                  {researchInfo.gender.map((gender) => {
+                    return ( 
+                      <Button key={gender} style={{ marginRight: "5px" }}>
+                        {gender}
+                        <span className="close-btn" id={gender} name="gender" aria-hidden="true" onClick={handleRemoveItem}>&times;</span>
+                      </Button>
+                    );
+                  })}
+                </div>
               </Col>
             </Form.Group>
             {/* Ethinicty select */}
-            <Form.Group as={Row} controlId="studyName">
+            <Form.Group as={Row}>
               <Col sm={2}>
-                <Form.Label>
+                <Form.Label >
                   Ethinicty
                 </Form.Label>
                 <Form.Text>(Leave blank if allow all)</Form.Text>
               </Col>
               <Col sm={10}>
-                <Form.Check 
-                  type="radio"
-                  label='Hispanic or Latino'
-                  value={"Hispanic"}
-                  name="ethinicty"
-                  onChange={handleChange}
-                />{" "}
-                <Form.Check
-                  type="radio"
-                  label='Not Hispanic or Latino'
-                  value={"Not Hispanic or Latino"}
-                  name="ethinicty"
-                  onChange={handleChange}
-                />{" "}
+                <Form.Check>
+                  <Form.Check.Input type="radio" name="ethnicity" id="hispanic" onChange={handleChange} value={"Hispanic"} />
+                  <Form.Check.Label htmlFor="hispanic" name="ethnicity" onChange={handleChange} value={"Hispanic"}>Hispanic or Latino</Form.Check.Label>
+                </Form.Check>
+                <Form.Check>
+                  <Form.Check.Input type="radio" name="ethnicity" id="not-hispanic" onChange={handleChange} value={"Not Hispanic or Latino"} />
+                  <Form.Check.Label htmlFor="not-hispanic" name="ethnicity" onChange={handleChange} value={"Not Hispanic or Latino"}>Not Hispanic or Latino</Form.Check.Label>
+                </Form.Check>
               </Col>
             </Form.Group>
+            
+            
             {/* race select */}
             <Form.Group as={Row} controlId="studyName">
               <Col sm={2}>
@@ -385,21 +406,42 @@ const AddNewStudies = () => {
                 <Form.Text>(Leave blank if allow all)</Form.Text>
               </Col>
               <Col sm={10}>
-                <Form.Control name="race" as="select" defaultValue="All" onChange={handleChange}>
-                  <option value="">All</option>
-                  <option value="American Indian">American Indian or Alaska Native</option>
-                  <option value="Asian">Asian</option>
-                  <option value="African American">Black or African American</option>
-                  <option value="Native Hawaiian">Native Hawaiian or Other Pacific Islander</option>
-                  <option value="White">White</option>
+                <Form.Control name="race" as="select" onChange={handleChange} multiple>
+                  <option value="American Indian" disabled={researchInfo.race.includes("American Indian")}>
+                    American Indian or Alaska Native
+                  </option>
+                  <option value="Asian" disabled={researchInfo.race.includes("Asian")}>
+                    Asian
+                  </option>
+                  <option value="African American" disabled={researchInfo.race.includes("African American")}>
+                    Black or African American
+                  </option>
+                  <option value="Native Hawaiian" disabled={researchInfo.race.includes("Native Hawaiian")}>
+                    Native Hawaiian or Other Pacific Islander
+                  </option>
+                  <option value="White" disabled={researchInfo.race.includes("White")}>
+                    White
+                  </option>
                 </Form.Control>
+                <div style={{ marginTop: "10px" }}>
+                  {researchInfo.race.map((race) => {
+                    return ( 
+                      <Button key={race} style={{ marginRight: "5px" }}>
+                        {race}
+                        <span className="close-btn" id={race} name="race" aria-hidden="true" onClick={handleRemoveItem}>&times;</span>
+                      </Button>
+                    );
+                  })}
+                </div>
               </Col>
             </Form.Group>
 
             {/* Submit button */}
             <Form.Group as={Row} controlId="researchSubmit">
               <Col md={{ span: 10, offset: 2 }}>
-                <Button type="submit" variant="success" size="lg">Add this study</Button>
+                <Button type="submit" variant="success" size="lg">
+                  Add this study
+                </Button>
               </Col>
             </Form.Group>
           </Form>

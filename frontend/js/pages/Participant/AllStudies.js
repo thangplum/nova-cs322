@@ -1,30 +1,51 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Table, Button } from 'react-bootstrap';
+import { Card, Table, Button, Pagination } from 'react-bootstrap';
 import axios from 'axios';
 import getCookieToken from "../../utils/getCookieToken";
 import { useHistory, useLocation } from "react-router-dom";
 
 const AllStudies = () => {
   const [allStudies, setAllStudies] = useState([]);
+  const [count, setCount] = useState(0);
+  const [currPage, setCurrPage] = useState(1);
   let history = useHistory();
   let location= useLocation();
 
-  useEffect(() => {
-    var csrftoken = getCookieToken('csrftoken');
+  // Setup pagination
+  let items = [];
 
-    axios.get('/api/form/', {
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Requested-With': 'XMLHttpRequest',
-        'X-CSRFToken': csrftoken
-      }
-    }).then (
-      response => {
-        setAllStudies(...allStudies, response.data.results)
-      }
-    ).catch (
-      error => console.log(error)
-    )
+  for (let number = 1; number <= Math.ceil(count/10); number++) {
+    items.push(
+      <Pagination.Item key={number} active={number === currPage} onClick={() => handleNavigate(number)}>
+        {number}
+      </Pagination.Item>
+    );
+  }
+
+  // "http://localhost:8000/api/form/?limit=10&offset=10"
+  const handleNavigate = async (pageNumber) => {
+    var csrftoken = getCookieToken('csrftoken');
+    setCurrPage(pageNumber);
+    let next = `/api/form/?limit=10&offset=${(pageNumber - 1) * 10}`;
+    
+    try {
+      const res = await axios.get(next, {
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest',
+          'X-CSRFToken': csrftoken
+        }
+      });
+      setAllStudies(res.data.results);
+      setCount(res.data.count);
+      
+    } catch(err) {
+      console.log(err);
+    }
+  }
+
+  useEffect(() => {
+    handleNavigate(1);
   }, [])
 
   function handleClick(id) {
@@ -47,19 +68,20 @@ const AllStudies = () => {
               </tr>
             </thead>
             <tbody>
-              {allStudies.map((study) => {
+              {allStudies.length > 0 && allStudies.map((study) => {
                 return (
                   <tr key={study.id}>
                     <td style={{ verticalAlign: "middle" }}>
-                      {study.activeStudy && 
+                      {study.activeStudy ? 
                       <div className="available-button">
                         <Button onClick={() => handleClick(study.id)}>Timeslots available</Button>
-                      </div>
+                      </div> :
+                      <div className="available-button">Timeslot is not available</div>
                       }
                     </td>
                     <td>
                       <div style={{ fontWeight: "600", fontSize: "1.5rem"}}>{study.studyName}</div>
-                      <div>{study.reseacher}</div>
+                      <div>{study.researcher}</div>
                       <div>{study.creditsResearch} credit(s)</div>
                     </td>
                     <td>
@@ -70,10 +92,13 @@ const AllStudies = () => {
                               "All"}
                       </div>
                       <div>
-                        Race: {study.race.length > 0 ? study.race.join() : "All"}
+                        Gender: {study.gender.length > 0 ? study.gender.join(", ") : "All"}
                       </div>
                       <div>
-                        Ethnicity: {study.ethinicty.length > 0 ? study.ethinicty.join() : "All"}
+                        Race: {study.race.length > 0 ? study.race.join(", ") : "All"}
+                      </div>
+                      <div>
+                        Ethnicity: {study.ethnicity !== "" ? study.ethnicity : "All"}
                       </div>
                     </td>
                   </tr>
@@ -81,6 +106,13 @@ const AllStudies = () => {
               })}
             </tbody>
           </Table>
+          <Pagination style={{ float: "right" }}>
+            <Pagination.First disabled={currPage === 1 ? true : false} onClick={() => handleNavigate(1)} />
+            <Pagination.Prev disabled={currPage === 1 ? true : false} onClick={() => handleNavigate(currPage - 1)} />
+            {items}
+            <Pagination.Next disabled={currPage === Math.ceil(count/10) ? true : false} onClick={() => handleNavigate(currPage + 1)} />
+            <Pagination.Last disabled={currPage === Math.ceil(count/10) ? true : false} onClick={() => handleNavigate(Math.ceil(count/10))} />
+          </Pagination>
         </Card.Body>
       </Card>
     </div>
