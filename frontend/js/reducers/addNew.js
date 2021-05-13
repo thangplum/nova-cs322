@@ -1,9 +1,30 @@
-import { ADD_NEW } from "../constants/action-types";
+const initialState = {
+  studyName: "",
+  briefAbstract: "",
+  detailedDescription: "",
+  duration: "",
+  creditsResearch: "",
+  researcher: "", 
+  instructor: "1",
+  approvalCode: "",
+  expireDate: "", //yyyy-mm-dd
+  approved: true,
+  activeStudy: true,
+  minAge: "",
+  maxAge: "",
+  gender: [],
+  race: [],
+  ethnicity: "",
+  appointment: ""
+}
 
-export default function addNew(state = {}, action) {
+export default function addNew(state = initialState, action) {
   switch (action.type) {
-    case ADD_NEW:
-      return action.payload;
+    case 'addNew/addInfo':
+      return {
+        ...state,
+        ...action.payload
+      };
     default:
       return state;
   }

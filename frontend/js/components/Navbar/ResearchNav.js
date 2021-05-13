@@ -1,15 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Navbar, Nav, Form } from 'react-bootstrap';
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { useRouteMatch } from "react-router-dom";
+import ProfileModal from "../ResearcherDashboard/profileModal";
 
 const ResearchNav =  () => {
   const {path} = useRouteMatch();
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
 
   const logout = () => {
-    window.location.href = "http://localhost:8000/logout";
+    window.location.href = "/logout";
   }
 
   return (
@@ -28,12 +34,15 @@ const ResearchNav =  () => {
             <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to="/dashboard">Dashboard</NavLink>
           </Nav>
           <Form inline>
-            <a onClick={logout}>
+            <a style={{ textDecoration: "none", marginRight: "20px" }} className="link" onClick={handleShow}>
+              My profile
+            </a>
+            <a style={{ textDecoration: "none", marginRight: "20px" }} className="link" onClick={logout}>
               Log out
               <FontAwesomeIcon style={{ marginLeft: '5px'}} icon={faSignOutAlt} />
             </a>
           </Form>
-          
+          <ProfileModal show={show} handleClose={handleClose} />
         </Navbar.Collapse>
         
       </Navbar>

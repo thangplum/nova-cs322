@@ -87,8 +87,8 @@ const AllStudies = () => {
                     <td>
                       <div>
                         Age: {study.minAge !== "" && study.maxAge !== "" ? `Between age ${study.minAge} and ${study.maxAge}` :
-                              study.minAge !== "" && study.maxAge ? `Older than ${study.minAge}` :
-                              study.minAge === "" && study.maxAge ? `Younger than ${study.maxAge}` :
+                              study.minAge !== "" && study.maxAge === "" ? `Older than ${study.minAge}` :
+                              study.minAge === "" && study.maxAge !== "" ? `Younger than ${study.maxAge}` :
                               "All"}
                       </div>
                       <div>
