@@ -6,12 +6,13 @@ from django.contrib.auth.views import LogoutView
 import django_js_reverse.views
 from rest_framework.routers import DefaultRouter
 
-from researcherFormApi.views import ResearchFormViewSet
+from researcherFormApi.views import ResearchFormViewSet, MyResearchViewSet
 from course.views import CourseViewSet
 from users.views import profileViewSet
 
 router = DefaultRouter()
 router.register('form', ResearchFormViewSet, basename="form")
+router.register('research', MyResearchViewSet, basename="research")
 router.register('course', CourseViewSet, basename="course")
 router.register('profile', profileViewSet, basename="profile")
 admin.site.site_header = "Praire Fire Admin"

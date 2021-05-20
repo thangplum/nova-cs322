@@ -46,3 +46,8 @@ class ResearchFormViewSet(viewsets.ViewSet):
                 return Response(serializer.data, status=status.HTTP_200_OK)
             return Response(status=status.HTTP_401_UNAUTHORIZED)
 
+class MyResearchViewSet(viewsets.ViewSet):
+    def list(self, request):
+        research = formResearch.objects.filter(user=request.user)
+        serializer = formResearchSerializer(research, many=True)
+        return Response(serializer.data)
