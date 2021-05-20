@@ -25,6 +25,14 @@ class User(AbstractBaseUser, PermissionsMixin, IndexedTimeStampedModel):
         ),
     )
 
+    is_researcher = models.BooleanField(
+        default=False, help_text=_("Designates whether the user can access researcher portal")
+    )
+
+    is_instructor = models.BooleanField(
+        default=False, help_text=_("Designates whether the user can access the instructor portal")
+    )
+
     objects = UserManager()
 
     USERNAME_FIELD = "email"
@@ -49,7 +57,10 @@ class Profile(models.Model):
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-        Profile.objects.create(user=instance)   
+        Profile.objects.create(user=instance)
+        # data=SocialAccount.objects.get(user=instance).extra_data
+        # name=data.get('name')
+        # instance.profile.name = name   
     instance.profile.save()
 
 @receiver(post_save, sender=User)
