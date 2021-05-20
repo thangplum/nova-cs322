@@ -51,6 +51,8 @@ class Profile(models.Model):
     name = models.CharField(max_length=100, blank=True)
     age = models.CharField(max_length=100, blank=True)
     ethnicity = models.CharField(max_length=100, blank=True)
+    gender = models.CharField(max_length=100, blank=True)
+    email = models.EmailField(max_length=100, blank=True)
     race = models.CharField(max_length=100, blank=True)
     surveys = ArrayField(models.CharField(max_length=100), blank=True, default=list)
 
