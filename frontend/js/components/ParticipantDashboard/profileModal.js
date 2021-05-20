@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { Modal, Button, Form, Row, Col } from 'react-bootstrap';
 
 const ProfileModal = ({ show, handleClose }) => {
+  const [profileInfo, setProfileInfo] = useState({
+    name: '',
+    age: '',
+    ethnicity: '', 
+    race: ''
+  })
+
+  function handleChange(e) {
+    let value = e.target.value;
+    setProfileInfo({
+      ...profileInfo,
+      [e.target.name]: value
+    })
+    console.log(profileInfo);
+  }
+
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
@@ -11,17 +27,20 @@ const ProfileModal = ({ show, handleClose }) => {
         <Form>
           <Form.Group controlId="profileFullname">
             <Form.Label>Full name</Form.Label>
-            <Form.Control type="text" />
-          </Form.Group>
-
-          <Form.Group controlId="profileEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" />
+            <Form.Control 
+              type="text" 
+              name='name' 
+              onChange={handleChange}
+            />
           </Form.Group>
 
           <Form.Group controlId="profileAge">
             <Form.Label>Age</Form.Label>
-            <Form.Control type="number" />
+            <Form.Control 
+              type="number" 
+              name='age'
+              onChange={handleChange}
+            />
           </Form.Group>
 
           <fieldset>

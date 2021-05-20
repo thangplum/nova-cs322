@@ -8,4 +8,3 @@ const MySchedule = () => {
 }
 
 export default MySchedule;
-;

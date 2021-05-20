@@ -1,44 +1,43 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Card, Form, Row, Col, Button } from 'react-bootstrap';
 import axios from 'axios';
-import getCookieToken from "../../utils/getCookieToken";
+import getCookieToken from '../../utils/getCookieToken';
 
 const AddAppointment = () =>  {
   const [researchInfo, setInfo] = useState(JSON.parse(localStorage.getItem("researchInfo")));
-  const csrftoken = getCookieToken();
+  const csrftoken = getCookieToken('csrftoken');
 
   function handleChange(e) {    
     let value = e.target.value;
-    console.log(researchInfo);
-    console.log(value);
     setInfo({
       ...researchInfo,
-      appointment: value
+      link: value
     });
   }
 
   function onSubmit(e) {
     e.preventDefault();
-    if (link === "") {
+    // TODO: Verify link is a proper google form link or and Calender ID
+    if (researchInfo.link === "") {
       alert("Please put in your appointment link");
     }
 
-    // axios.post('/api/form/', researchInfo, {
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'X-Requested-With': 'XMLHttpRequest',
-    //     'X-CSRFToken': csrftoken
-    //   }
-    // }).then (
-    //   response => {
-    //     console.log(response.data);
-    //     if(confirm("You have successfully created a new research")) {
-    //       window.location.href = "/researcher";
-    //     }
-    //   }
-    // ).catch (
-    //   error => console.log(error)
-    // )
+    axios.post('/api/form/', researchInfo, {
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRFToken': csrftoken
+      }
+    }).then (
+      response => {
+        if(confirm("You have successfully created a new research")) {
+          localStorage.clear();
+          window.location.href = "/researcher";
+        }
+      }
+    ).catch (
+      error => console.log(error)
+    )
   } 
 
   return (
@@ -52,7 +51,7 @@ const AddAppointment = () =>  {
                 Calender Link *
               </Form.Label>
               <Col sm={10}>
-                <Form.Control name="appointment" type="text" value={researchInfo.appointment} onChange={handleChange} />
+                <Form.Control name="link" type="text" value={researchInfo.appointment} onChange={handleChange} />
               </Col>
             </Form.Group>
             <Form.Group as={Row} controlId="appointmentSubmit">

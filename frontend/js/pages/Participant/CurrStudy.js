@@ -2,10 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import { Card, Table, Button } from 'react-bootstrap';
 import getCookieToken from "../../utils/getCookieToken";
+import { useHistory, useLocation } from "react-router-dom";
 import axios from "axios";
 
 const CurrStudy = () => {
   const { id } = useParams();
+  let history = useHistory();
+  let location= useLocation();
+
   const [study, setStudy] = useState({});
 
   useEffect(() => {
@@ -61,7 +65,7 @@ const CurrStudy = () => {
             </tbody>
           </Table>
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <Button variant="success">View timeslots for this study</Button>
+            <Button variant="success" onClick={() => history.push(`${location.pathname}/timeslots`)}>View timeslots for this study</Button>
           </div>
         </Card.Body>
       </Card>

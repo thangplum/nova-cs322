@@ -23,7 +23,7 @@ const AddNewStudies = ({ }) => {
     gender: [],
     race: [],
     ethnicity: "",
-    appointment: ""
+    link: ""
     // gender: Male: M, Feamale: F, Not Sprcified: NA
   })
 
