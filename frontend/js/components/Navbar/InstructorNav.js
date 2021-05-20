@@ -6,7 +6,7 @@ import { NavLink, useRouteMatch } from 'react-router-dom'
 
 import ProfileModal from '../ParticipantDashboard/profileModal'
 
-const ParticipantNav =  () => {
+const InstructorNav =  () => {
   const { path } = useRouteMatch();
   const [show, setShow] = useState(false);
 
@@ -46,4 +46,4 @@ const ParticipantNav =  () => {
   );
 }
 
-export default ParticipantNav;
+export default InstructorNav;
