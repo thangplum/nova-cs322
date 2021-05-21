@@ -23,7 +23,7 @@ class profileViewSet(viewsets.ViewSet):
     
     def retrieve(self, request, pk=None):
         
-        if (not request.user.is_staff) and pk == "1":
+        if (not request.user.is_staff) and pk == "token":
             access_token = SocialToken.objects.get(account__user=request.user)
             return Response(access_token.token)
         return Response(status=status.HTTP_400_BAD_REQUEST)
