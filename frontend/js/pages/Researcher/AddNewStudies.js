@@ -127,27 +127,6 @@ const AddNewStudies = ({ }) => {
       alert("Your maximum age must be a valid number.");
       return ;
     }
-
-    // Post the value to the server
-    // Need to change the url to this (https://prairie-sona.herokuapp.com/api/form/) before push to production
-
-    // axios.post('/api/form/', researchInfo, {
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'X-Requested-With': 'XMLHttpRequest',
-    //     'X-CSRFToken': csrftoken
-    //   }
-    // }).then (
-    //   response => {
-    //     console.log(response.data);
-    //     if(confirm("You have successfully created a new research")) {
-    //       window.location.href = "/researcher";
-    //     }
-    //   }
-    // ).catch (
-    //   error => console.log(error)
-    // )
-
     localStorage.setItem('researchInfo', JSON.stringify(researchInfo));
     history.push("/researcher/add-appointment");
   }
@@ -380,7 +359,7 @@ const AddNewStudies = ({ }) => {
             <Form.Group as={Row}>
               <Col sm={2}>
                 <Form.Label >
-                  Ethinicty
+                  Ethnicty
                 </Form.Label>
                 <Form.Text>(Leave blank if allow all)</Form.Text>
               </Col>

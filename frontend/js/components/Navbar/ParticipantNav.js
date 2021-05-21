@@ -30,7 +30,6 @@ const ParticipantNav =  () => {
       }
     }).then (
       response => {
-        console.log(response.data);
         if (response.data.name === '') {
           setShow(true);
         }
