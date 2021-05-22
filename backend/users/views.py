@@ -1,5 +1,6 @@
+
 from django.shortcuts import render  # noqa
-from allauth.socialaccount.models import SocialToken
+from allauth.socialaccount.models import SocialApp, SocialToken
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from .models import User
@@ -25,6 +26,10 @@ class profileViewSet(viewsets.ViewSet):
         
         if (not request.user.is_staff) and pk == "token":
             access_token = SocialToken.objects.get(account__user=request.user)
-            return Response(access_token.token)
+            app = SocialApp.objects.get(name="priarefire")
+            return Response({
+                "token":access_token.token,
+                "api_key":app.key
+                })
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
