@@ -19,7 +19,11 @@ const AddAppointment = () =>  {
     e.preventDefault();
     // TODO: Verify link is a proper google form link or and Calender ID
     if (researchInfo.link === "") {
-      alert("Please put in your appointment link");
+      alert("Please put in your appointment calender ID");
+      return ;
+    } else if (!researchInfo.link.includes('@group.calendar.google.com') && !researchInfo.link.includes('@knox.edu')) {
+      alert("Please put in a valid appointment calender ID");
+      return ;
     }
 
     axios.post('/api/form/', researchInfo, {

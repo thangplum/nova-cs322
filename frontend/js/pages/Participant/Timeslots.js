@@ -1,25 +1,83 @@
-import React from 'react';
-import axios from 'axios';
-import { Button } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Card, Table,  Pagination } from 'react-bootstrap';
+import TimeslotsRow from './TimeslotsRow';
+import { useSelector } from 'react-redux';
 
 const Timeslots = () => {
-  const CALENDAR_ID = 'c_fo78t9k5qf3atuv5dujmmcl21g@group.calendar.google.com';
-  const API_KEY = 'key'
-  let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events`;
+  //const slots = useSelector(state => state.addAppointment.slots);
+  const slots = useSelector(state => state.addAppointment.slots);
+  const [count, setCount] = useState(slots.length);
+  const [currPage, setCurrPage] = useState(1);
+  const [currList, setCurrList] = useState(slots.slice(10));
+ 
+  // Setup pagination
+  let items = [];
 
-  const handleFetchEvents = () => {
-    axios.get(url)
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => error)
+  for (let number = 1; number <= Math.ceil(count/10); number++) {
+    items.push(
+      <Pagination.Item key={number} active={number === currPage} onClick={() => handleNavigate(number)}>
+        {number}
+      </Pagination.Item>
+    );
   }
 
+  const handleNavigate = (pageNumber) => {
+    setCurrPage(pageNumber);
+    setCurrList(slots.slice(10 * (pageNumber - 1), 10 * pageNumber));
+  }
 
   return (
-    <div>
-      <Button onClick={handleFetchEvents}>Click to get events</Button>
-    </div>
+    <>
+      {
+        slots && slots.length > 0 ?
+        <Card className="db-card" id="info">
+          <Card.Header as="h3">
+            <div style={{ fontWeight: "700" }}>All available timeslots</div>
+          </Card.Header>
+          <Card.Body>
+            <Table striped bordered hover>
+              <thead>
+                <tr>
+                  <th style={{ width: '85%' }}>Timeslot Information</th>
+                  <th>Reserve</th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  currList.map((slot, index) => {
+                    if (typeof slot.start !== 'undefined') {
+                      return (
+                        <TimeslotsRow 
+                          key={index}
+                          startDate={slot.start.dateTime} 
+                          endDate={slot.end.dateTime}
+                          link={slot.htmlLink}
+                        />
+                      );
+                    }
+                    
+                    return null;
+                  })
+                }
+                
+              </tbody>
+            </Table>
+            {
+            count > 10 ?
+            <Pagination style={{ float: "right" }}>
+              <Pagination.First disabled={currPage === 1 ? true : false} onClick={() => handleNavigate(1)} />
+              <Pagination.Prev disabled={currPage === 1 ? true : false} onClick={() => handleNavigate(currPage - 1)} />
+              {items}
+              <Pagination.Next disabled={currPage === Math.ceil(count/10) ? true : false} onClick={() => handleNavigate(currPage + 1)} />
+              <Pagination.Last disabled={currPage === Math.ceil(count/10) ? true : false} onClick={() => handleNavigate(Math.ceil(count/10))} />
+            </Pagination> : null
+          }
+          </Card.Body>
+        </Card> : <h5>Loading...</h5>
+      }
+    </>
+    
+    
   );
 }
 

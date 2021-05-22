@@ -3,6 +3,7 @@ import { Card, Table, Button, Pagination } from 'react-bootstrap';
 import axios from 'axios';
 import getCookieToken from "../../utils/getCookieToken";
 import { useHistory, useLocation } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const AllStudies = () => {
   const [allStudies, setAllStudies] = useState([]);
@@ -36,8 +37,8 @@ const AllStudies = () => {
           'X-CSRFToken': csrftoken
         }
       });
-      setAllStudies(res.data.results);
-      setCount(res.data.count);
+      setAllStudies(res.data);
+      setCount(res.data.length);
       
     } catch(err) {
       console.log(err);
@@ -47,10 +48,6 @@ const AllStudies = () => {
   useEffect(() => {
     handleNavigate(1);
   }, [])
-
-  function handleClick(id) {
-    history.push(`${location.pathname}/${id}`);
-  }
 
   return (
     <div id="all-studies-page">
@@ -74,7 +71,9 @@ const AllStudies = () => {
                     <td style={{ verticalAlign: "middle" }}>
                       {study.activeStudy ? 
                       <div className="available-button">
-                        <Button onClick={() => handleClick(study.id)}>Timeslots available</Button>
+                        <Link to={`${location.pathname}/${study.id}`}>
+                          <Button>Timeslots available</Button>
+                        </Link>
                       </div> :
                       <div className="available-button">Timeslot is not available</div>
                       }
@@ -106,13 +105,27 @@ const AllStudies = () => {
               })}
             </tbody>
           </Table>
-          <Pagination style={{ float: "right" }}>
-            <Pagination.First disabled={currPage === 1 ? true : false} onClick={() => handleNavigate(1)} />
-            <Pagination.Prev disabled={currPage === 1 ? true : false} onClick={() => handleNavigate(currPage - 1)} />
-            {items}
-            <Pagination.Next disabled={currPage === Math.ceil(count/10) ? true : false} onClick={() => handleNavigate(currPage + 1)} />
-            <Pagination.Last disabled={currPage === Math.ceil(count/10) ? true : false} onClick={() => handleNavigate(Math.ceil(count/10))} />
-          </Pagination>
+          {
+            count > 10 ?
+            <Pagination style={{ float: "right" }}>
+              <Pagination.First disabled={currPage === 1 ? true : false} onClick={() => handleNavigate(1)} />
+              <Pagination.Prev disabled={currPage === 1 ? true : false} onClick={() => handleNavigate(currPage - 1)} />
+              {/* {
+                items.length > 3 ?
+                <>
+                  <Pagination.Ellipsis />  
+                  {items[currPage- 1]}      
+                  {items[currPage]}
+                  {items[currPage + 1]}
+                  <Pagination.Ellipsis />
+                </> : {items}
+              } */}
+              {items}
+              <Pagination.Next disabled={currPage === Math.ceil(count/10) ? true : false} onClick={() => handleNavigate(currPage + 1)} />
+              <Pagination.Last disabled={currPage === Math.ceil(count/10) ? true : false} onClick={() => handleNavigate(Math.ceil(count/10))} />
+            </Pagination> : null
+          }
+          
         </Card.Body>
       </Card>
     </div>
