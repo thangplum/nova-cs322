@@ -32,7 +32,6 @@ DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 
 INSTALLED_APPS = [
     "django.contrib.admin",
-    "oauth_app",
     "researcherFormApi",
     "course",
     "allauth",
