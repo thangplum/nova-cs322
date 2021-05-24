@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Card, Table, Button, Pagination } from 'react-bootstrap';
 import axios from 'axios';
 import getCookieToken from "../../utils/getCookieToken";
-import { useHistory, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Link } from 'react-router-dom';
 
 const AllStudies = () => {
   const [allStudies, setAllStudies] = useState([]);
   const [count, setCount] = useState(0);
   const [currPage, setCurrPage] = useState(1);
-  let history = useHistory();
+
   let location= useLocation();
 
   // Setup pagination
@@ -59,7 +59,7 @@ const AllStudies = () => {
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th style={{ width: "15%" }}>Available?</th>
+                <th style={{ width: "15%" }}></th>
                 <th>Study Information</th>
                 <th>Eligibility</th>
               </tr>
@@ -72,7 +72,7 @@ const AllStudies = () => {
                       {study.activeStudy ? 
                       <div className="available-button">
                         <Link to={`${location.pathname}/${study.id}`}>
-                          <Button>Timeslots available</Button>
+                          <Button>Reserve</Button>
                         </Link>
                       </div> :
                       <div className="available-button">Timeslot is not available</div>

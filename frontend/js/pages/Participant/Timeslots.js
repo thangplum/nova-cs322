@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, Table,  Pagination } from 'react-bootstrap';
 import TimeslotsRow from './TimeslotsRow';
 import { useSelector } from 'react-redux';
 
 const Timeslots = () => {
-  //const slots = useSelector(state => state.addAppointment.slots);
   const slots = useSelector(state => state.addAppointment.slots);
   const [count, setCount] = useState(slots.length);
   const [currPage, setCurrPage] = useState(1);
@@ -25,6 +24,10 @@ const Timeslots = () => {
     setCurrPage(pageNumber);
     setCurrList(slots.slice(10 * (pageNumber - 1), 10 * pageNumber));
   }
+
+  useEffect(() => {
+    handleNavigate(1);
+  }, [])
 
   return (
     <>

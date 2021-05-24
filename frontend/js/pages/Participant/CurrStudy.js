@@ -46,33 +46,37 @@ const CurrStudy = () => {
       }
     }).then (
       response => {
-        console.log(response.data);
-        //setToken(response.data);
+        setToken(response.data.token);
+        setApiKey(response.data.api_key);
       }
     ).catch (
       error => console.log(error)
     )
   }, [])
 
-  // useEffect(() => {
-  //   const CALENDAR_ID = study.link;
-  //   const apiKey = 'AIzaSyDHIPr6aYt74zANOdGi9RBqXlPovV00OEo';
-  //   let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?key=${apiKey}`;
+  useEffect(() => {
+    const CALENDAR_ID = study.link;
+    console.log(CALENDAR_ID);
+    
+    if (token !== '' && typeof CALENDAR_ID !== 'undefined') {
+      let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?singleEvents=true&key=${apiKey}`;
 
-  //   if (token !== '') {
-  //     axios.get(url, {
-  //       headers: {
-  //         'Authorization': `Bearer ${token}`
-  //       }
-  //     }).then (
-  //       response => {
-  //         setSlots(response.data.items);
-  //       }
-  //     ).catch (
-  //       error => console.log(error)
-  //     )
-  //   }
-  // }, [token])
+      axios.get(url, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+        params: {
+          'singleEvents': true
+        }
+      }).then (
+        response => {
+          setSlots(response.data.items);
+        }
+      ).catch (
+        error => console.log(error)
+      )
+    }
+  }, [token])
 
   const handleBook = () => {
     dispatch(addNewAppointmentSlots(slots));

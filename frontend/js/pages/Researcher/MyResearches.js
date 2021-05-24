@@ -8,7 +8,7 @@ const MyResearches = () => {
     const fetchResearch = async () => {
       var csrftoken = getCookieToken('csrftoken');
       try {
-        const res = await axios.get('api/research/', {
+        const res = await axios.get('/api/research/', {
           headers: {
             'Content-Type': 'application/json',
             'X-Requested-With': 'XMLHttpRequest',
