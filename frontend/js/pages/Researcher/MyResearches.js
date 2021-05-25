@@ -2,9 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { Card, Table, Button, Pagination } from 'react-bootstrap';
 import getCookieToken from '../../utils/getCookieToken';
 import axios from 'axios';
+import ResearchEditModal from '../../components/ResearcherDashboard/researchEditModal';
 
 const MyResearches = () => {
   const [studies, setStudies] = useState([]);
+  const [show, setShow] = useState(false);
+  const [currId, setCurrId] = useState('');
+  const [saveChanges, setSaveChanges] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = (id) => {
+    setCurrId(id);
+    setShow(true);
+  };
 
   useEffect(() => {
     const fetchResearch = async () => {
@@ -18,13 +28,16 @@ const MyResearches = () => {
           }
         })
         setStudies(res.data);
+        if (saveChanges) {
+          setSaveChanges(false);
+        }
       } catch(err) {
         console.log(err);
       }
     }
     
     fetchResearch();
-  }, [])
+  }, [saveChanges])
 
   return (
     <div id="all-studies-page">
@@ -48,7 +61,12 @@ const MyResearches = () => {
                       <th>{study.id}</th>
                       <th><h4>{study.studyName}</h4></th>
                       <th>
-                        <Button style={{ width: '100%' }}>Edit</Button>
+                        <Button 
+                          style={{ width: '100%' }}
+                          onClick={() => handleShow(study.id)}
+                        >
+                          Edit
+                        </Button>
                       </th>
                     </tr>
                   );
@@ -57,6 +75,7 @@ const MyResearches = () => {
             </Table>
           </Card.Body>
         </Card>
+        <ResearchEditModal id={currId} show={show} handleClose={handleClose} setSaveChanges={setSaveChanges} />
     </div>
   );
 }
