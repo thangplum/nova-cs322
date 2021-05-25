@@ -8,8 +8,8 @@ const myStudiesCard = () => {
   let history = useHistory();
   const { path } = useRouteMatch();
 
-  function handleClick() {
-    history.push(`${path}/my-researches`);
+  function handleClick(link) {
+    history.push(`${path}/${link}`);
   }
 
   //console.log(route);
@@ -17,11 +17,11 @@ const myStudiesCard = () => {
     <Card className="db-card">
       <Card.Header id="card-header">My studies</Card.Header>
       <ListGroup variant="flush">  
-        <ListGroup.Item action onClick={handleClick}>
+        <ListGroup.Item action onClick={() => handleClick('my-researches')}>
           <FontAwesomeIcon style={{ marginRight: '5px'}} icon={faEdit} />
           View and edit your studies
         </ListGroup.Item>
-        <ListGroup.Item>
+        <ListGroup.Item action onClick={() => handleClick('edit-timeslot')}>
         <FontAwesomeIcon style={{ marginRight: '5px'}} icon={faCalendarCheck} />
           View, add or edit timeslots
         </ListGroup.Item>

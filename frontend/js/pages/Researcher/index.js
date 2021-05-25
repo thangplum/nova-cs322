@@ -10,6 +10,7 @@ import AddNewStudies from "./AddNewStudies";
 import AddAppointment from './AddAppointment';
 import MyResearches from './MyResearches';
 import AllResearches from './AllResearches';
+import EditTimeslot from './EditTimeslot';
 
 const ResearchRoutes = () => {
   const { path } = useRouteMatch();
@@ -32,6 +33,9 @@ const ResearchRoutes = () => {
         </Route>
         <Route path={`${path}/all-researches`}>
           <AllResearches />
+        </Route>
+        <Route path={`${path}/edit-timeslot`}>
+          <EditTimeslot />
         </Route>
       </Switch>
       

@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Card, Table, Button, Pagination } from 'react-bootstrap';
 import getCookieToken from '../../utils/getCookieToken';
 import axios from 'axios';
-import ResearchEditModal from '../../components/ResearcherDashboard/researchEditModal';
+import TimeslotModal from '../../components/ResearcherDashboard/TimeslotModal';
 
-const MyResearches = () => {
+
+const EditTimeslot = () => {
   const [studies, setStudies] = useState([]);
   const [show, setShow] = useState(false);
   const [currId, setCurrId] = useState('');
-  const [saveChanges, setSaveChanges] = useState(false);
   const [count, setCount] = useState(0);
   const [currPage, setCurrPage] = useState(1);
 
@@ -58,7 +58,7 @@ const MyResearches = () => {
     <div id="all-studies-page">
       <Card className="db-card" id="info">
         <Card.Header as="h3">
-          <div style={{ fontWeight: "700" }}>Edit Timeslot</div>
+          <div style={{ fontWeight: "700" }}>My researches</div>
         </Card.Header>
         <Card.Body>
           <Table striped bordered hover>
@@ -93,6 +93,16 @@ const MyResearches = () => {
             <Pagination style={{ float: "right" }}>
               <Pagination.First disabled={currPage === 1 ? true : false} onClick={() => handleNavigate(1)} />
               <Pagination.Prev disabled={currPage === 1 ? true : false} onClick={() => handleNavigate(currPage - 1)} />
+              {/* {
+                items.length > 3 ?
+                <>
+                  <Pagination.Ellipsis />  
+                  {items[currPage- 1]}      
+                  {items[currPage]}
+                  {items[currPage + 1]}
+                  <Pagination.Ellipsis />
+                </> : {items}
+              } */}
               {items}
               <Pagination.Next disabled={currPage === Math.ceil(count/10) ? true : false} onClick={() => handleNavigate(currPage + 1)} />
               <Pagination.Last disabled={currPage === Math.ceil(count/10) ? true : false} onClick={() => handleNavigate(Math.ceil(count/10))} />
@@ -100,9 +110,9 @@ const MyResearches = () => {
           }
         </Card.Body>
       </Card>
-      <ResearchEditModal id={currId} show={show} handleClose={handleClose} setSaveChanges={setSaveChanges} />
+      <TimeslotModal id={currId} show={show} handleClose={handleClose} />
     </div>
   );
 }
 
-export default MyResearches;
+export default EditTimeslot;

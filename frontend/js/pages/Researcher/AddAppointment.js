@@ -52,7 +52,7 @@ const AddAppointment = () =>  {
           <Form onSubmit={onSubmit}>
             <Form.Group as={Row} controlId="appointmentInput">
               <Form.Label column sm={2}>
-                Calender Link *
+                Calender ID *
               </Form.Label>
               <Col sm={10}>
                 <Form.Control name="link" type="text" value={researchInfo.appointment} onChange={handleChange} />
