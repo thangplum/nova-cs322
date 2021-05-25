@@ -9,6 +9,7 @@ import ResearcherDashboard from './ResearcherDashboard';
 import AddNewStudies from "./AddNewStudies";
 import AddAppointment from './AddAppointment';
 import MyResearches from './MyResearches';
+import AllResearches from './AllResearches';
 
 const ResearchRoutes = () => {
   const { path } = useRouteMatch();
@@ -28,6 +29,9 @@ const ResearchRoutes = () => {
         </Route>
         <Route path={`${path}/my-researches`}>
           <MyResearches />
+        </Route>
+        <Route path={`${path}/all-researches`}>
+          <AllResearches />
         </Route>
       </Switch>
       

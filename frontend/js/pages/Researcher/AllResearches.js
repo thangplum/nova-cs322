@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Table, Button, Pagination } from 'react-bootstrap';
+import getCookieToken from '../../utils/getCookieToken';
 import axios from 'axios';
-import getCookieToken from "../../utils/getCookieToken";
 import { useLocation } from "react-router-dom";
 import { Link } from 'react-router-dom';
 
-const AllStudies = () => {
+const AllResearches = () => {
   const [allStudies, setAllStudies] = useState([]);
   const [count, setCount] = useState(0);
   const [currPage, setCurrPage] = useState(1);
@@ -47,9 +47,8 @@ const AllStudies = () => {
   useEffect(() => {
     handleNavigate(1);
   }, [])
-
   return (
-    <div id="all-studies-page">
+    <div id="all-researches-page">
       <Card className="db-card" id="info">
         <Card.Header as="h3">
           <div style={{ fontWeight: "700" }}>All available studies</div>
@@ -58,7 +57,7 @@ const AllStudies = () => {
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th style={{ width: "15%" }}></th>
+                <th style={{ width: "10%" }}>Index</th>
                 <th>Study Information</th>
                 <th>Eligibility</th>
               </tr>
@@ -67,15 +66,8 @@ const AllStudies = () => {
               {allStudies.length > 0 && allStudies.map((study) => {
                 return (
                   <tr key={study.id}>
-                    <td style={{ verticalAlign: "middle" }}>
-                      {study.activeStudy ? 
-                      <div className="available-button">
-                        <Link to={`${location.pathname}/${study.id}`}>
-                          <Button>Reserve</Button>
-                        </Link>
-                      </div> :
-                      <div className="available-button">Timeslot is not available</div>
-                      }
+                    <td>
+                      {study.id}
                     </td>
                     <td>
                       <div style={{ fontWeight: "600", fontSize: "1.5rem"}}>{study.studyName}</div>
@@ -109,16 +101,6 @@ const AllStudies = () => {
             <Pagination style={{ float: "right" }}>
               <Pagination.First disabled={currPage === 1 ? true : false} onClick={() => handleNavigate(1)} />
               <Pagination.Prev disabled={currPage === 1 ? true : false} onClick={() => handleNavigate(currPage - 1)} />
-              {/* {
-                items.length > 3 ?
-                <>
-                  <Pagination.Ellipsis />  
-                  {items[currPage- 1]}      
-                  {items[currPage]}
-                  {items[currPage + 1]}
-                  <Pagination.Ellipsis />
-                </> : {items}
-              } */}
               {items}
               <Pagination.Next disabled={currPage === Math.ceil(count/10) ? true : false} onClick={() => handleNavigate(currPage + 1)} />
               <Pagination.Last disabled={currPage === Math.ceil(count/10) ? true : false} onClick={() => handleNavigate(Math.ceil(count/10))} />
@@ -131,4 +113,4 @@ const AllStudies = () => {
   );
 }
 
-export default AllStudies;
+export default AllResearches;
