@@ -31,5 +31,10 @@ class profileViewSet(viewsets.ViewSet):
                 "token":access_token.token,
                 "api_key":app.key
                 })
+        elif pk == "usertype":
+            return Response({
+                "is_researcher":request.user.is_researcher,
+                "is_instructor":request.user.is_instructor
+                })
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
