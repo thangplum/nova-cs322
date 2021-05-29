@@ -8,15 +8,10 @@
 __pycache__/
 /.vscode/
 yarn.lock
-<<<<<<< HEAD
-#databse
-.db
-=======
 
 #database
 .db/
 db/
->>>>>>> 64836e5fa6b6dcb6a33ecc7d24c870abf52a5651
 # coverage result
 .coverage
 /coverage/
