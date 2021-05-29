@@ -154,7 +154,7 @@ const ProfileModal = ({ show, handleClose }) => {
                   label="Not Hispanic or Latino"
                   name="ethnicity"
                   id="not hispanic"
-                  value='hispanic'
+                  value='not hispanic'
                   onChange={handleChange}
                   checked={profileInfo.ethnicity === 'not hispanic'}
                 />
