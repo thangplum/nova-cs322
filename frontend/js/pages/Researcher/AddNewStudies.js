@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
 import { Card, Form, Row, Col, InputGroup, Button } from 'react-bootstrap';
-import getCookieToken from "../../utils/getCookieToken";
-// Don't know why this library cannot be found when build so commenting this out for now 
-// and will try to find a fix for this
 import { DateTime } from 'luxon';
-import axios from 'axios';
+import { useHistory } from "react-router-dom";
 
-const AddNewStudies = () => {
-  var csrftoken = getCookieToken('csrftoken');
+const AddNewStudies = ({ }) => {
+  let history = useHistory();
   
   const [researchInfo, setResearchInfo] = useState({
     studyName: "",
@@ -25,7 +22,8 @@ const AddNewStudies = () => {
     maxAge: "",
     gender: [],
     race: [],
-    ethnicity: ""
+    ethnicity: "",
+    link: ""
     // gender: Male: M, Feamale: F, Not Sprcified: NA
   })
 
@@ -129,25 +127,8 @@ const AddNewStudies = () => {
       alert("Your maximum age must be a valid number.");
       return ;
     }
-
-    // Post the value to the server
-    // Need to change the url to this (https://prairie-sona.herokuapp.com/api/form/) before push to production
-    axios.post('/api/form/', researchInfo, {
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Requested-With': 'XMLHttpRequest',
-        'X-CSRFToken': csrftoken
-      }
-    }).then (
-      response => {
-        console.log(response.data);
-        if(confirm("You have successfully created a new research")) {
-          window.location.href = "/researcher";
-        }
-      }
-    ).catch (
-      error => console.log(error)
-    )
+    localStorage.setItem('researchInfo', JSON.stringify(researchInfo));
+    history.push("/researcher/add-appointment");
   }
 
   return (
@@ -176,10 +157,10 @@ const AddNewStudies = () => {
           <Form onSubmit={handleSubmit}>
             <Form.Group as={Row} controlId="studyName">
               <Form.Label column sm={2}>
-                Study name
+                Study name *
               </Form.Label>
               <Col sm={10}>
-                <Form.Control name="studyName" type="text" value={researchInfo.name} onChange={handleChange} />
+                <Form.Control name="studyName" type="text" value={researchInfo.studyName} onChange={handleChange} />
               </Col>
             </Form.Group>
             <Form.Group as={Row} controlId="studyAbstract">
@@ -187,10 +168,9 @@ const AddNewStudies = () => {
                 <Form.Label>
                   Brief Abstract
                 </Form.Label>
-                <Form.Text>(Optional)</Form.Text>
               </Col>
               <Col sm={10}>
-                <Form.Control name="briefAbstract" type="text" value={researchInfo.abstract} onChange={handleChange} />
+                <Form.Control name="briefAbstract" type="text" value={researchInfo.briefAbstract} onChange={handleChange} />
               </Col>
             </Form.Group>
             <Form.Group as={Row} controlId="researchDes">
@@ -198,16 +178,15 @@ const AddNewStudies = () => {
                 <Form.Label>
                   Detailed Description
                 </Form.Label>
-                <Form.Text>(Optional)</Form.Text>
               </Col>
               
               <Col sm={10}>
-                <Form.Control name="detailedDescription" value={researchInfo.desc} onChange={handleChange} type="text" as="textarea" rows={4} />
+                <Form.Control name="detailedDescription" value={researchInfo.detailedDescription} onChange={handleChange} type="text" as="textarea" rows={4} />
               </Col>
             </Form.Group>
             <Form.Group as={Row} controlId="researchDuration">
               <Form.Label column sm={2}>
-                Duration
+                Duration *
               </Form.Label>
               <Col sm={10} md={3} >
                 <InputGroup className="mb-2">
@@ -221,9 +200,9 @@ const AddNewStudies = () => {
             <Form.Group as={Row} controlId="researchCredit">
               <Col sm={2}>
                 <Form.Label>
-                  Credits
+                  Credits *
                 </Form.Label>
-                <Form.Text>(Must be divisible by 0.5)</Form.Text>
+                <Form.Text className="text-muted">(Must be divisible by 0.5)</Form.Text>
               </Col>
               
               <Col sm={10}>
@@ -231,23 +210,14 @@ const AddNewStudies = () => {
               </Col>
             </Form.Group>
             <Form.Group as={Row} controlId="researchResearcher">
-              <Form.Label column sm={2}>Researcher</Form.Label>
+              <Form.Label column sm={2}>Researcher *</Form.Label>
               <Col sm={10}>
-                <Form.Control type="text" name="researcher" onChange={handleChange} value={researchInfo.reseacher} />
+                <Form.Control type="text" name="researcher" onChange={handleChange} value={researchInfo.researcher} />
               </Col>
-              {/* Add twotable research style like Sona later */}
-              {/* <Col sm={2} style={{ textAlign: "center" }}>
-                <FontAwesomeIcon icon={faExchangeAlt} />
-              </Col>
-              <Col sm={4}>
-                <Form.Control as="select" custom htmlSize={3}>
-                  
-                </Form.Control>
-              </Col> */}
             </Form.Group>
             <Form.Group as={Row} controlId="studyInstructor">
               <Form.Label column sm={2}>
-                Instructor
+                Instructor *
               </Form.Label>
               <Col sm={10}>
                 <Form.Control as="select" custom name="instructor" value={researchInfo.instructor} onChange={handleChange}>
@@ -261,7 +231,7 @@ const AddNewStudies = () => {
             </Form.Group>
             <Form.Group as={Row} controlId="studyApprovalCode">
               <Form.Label column sm={2}>
-                Approval Code
+                Approval Code *
               </Form.Label>
               <Col sm={10}>
                 <Form.Control type="text" name="approvalCode" value={researchInfo.approvalCode} onChange={handleChange} />
@@ -270,9 +240,9 @@ const AddNewStudies = () => {
             <Form.Group as={Row} controlId="studyExpireDate">
               <Col sm={2}>
                 <Form.Label>
-                  Approval Expiration Date
+                  Approval Expiration Date *
                 </Form.Label>
-                <Form.Text>(YYYY-MM-DD)</Form.Text>
+                <Form.Text className="text-muted">(YYYY-MM-DD)</Form.Text>
               </Col>
               <Col sm={10}>
                 <Form.Control type="text" name="expireDate" value={researchInfo.expireDate} onChange={handleChange} />
@@ -288,7 +258,7 @@ const AddNewStudies = () => {
             </Form.Group>
             <Form.Group as={Row} controlId="studyIsActive">
               <Form.Label column sm={2}>
-                Active Study?
+                Active Study? *
               </Form.Label>
               <Col sm={10}>
                 <Form.Check 
@@ -326,7 +296,7 @@ const AddNewStudies = () => {
                 <Form.Label>
                   Minimum Age
                 </Form.Label>
-                <Form.Text>(Leave blank if allow all)</Form.Text>
+                <Form.Text className="text-muted">(Leave blank if allow all)</Form.Text>
               </Col>
               <Col sm={10}>
                 <Form.Control name="minAge" type="text" value={researchInfo.minAge === "0" ? "" : researchInfo.minAge} onChange={handleChange} />
@@ -338,7 +308,7 @@ const AddNewStudies = () => {
                 <Form.Label>
                   Maximum Age
                 </Form.Label>
-                <Form.Text>(Leave blank if allow all)</Form.Text>
+                <Form.Text className="text-muted">(Leave blank if allow all)</Form.Text>
               </Col>
               <Col sm={10}>
                 <Form.Control name="maxAge" type="text" value={researchInfo.maxAge === "0" ? "" : researchInfo.maxAge} onChange={handleChange} />
@@ -350,7 +320,7 @@ const AddNewStudies = () => {
                 <Form.Label>
                   Gender
                 </Form.Label>
-                <Form.Text>(Leave blank if allow all)</Form.Text>
+                <Form.Text className="text-muted">(Leave blank if allow all)</Form.Text>
               </Col>
               <Col sm={10}>
                 <Form.Control name="gender" as="select" htmlSize={3} onChange={handleChange} multiple>
@@ -380,9 +350,9 @@ const AddNewStudies = () => {
             <Form.Group as={Row}>
               <Col sm={2}>
                 <Form.Label >
-                  Ethinicty
+                  Ethnicty
                 </Form.Label>
-                <Form.Text>(Leave blank if allow all)</Form.Text>
+                <Form.Text className="text-muted">(Leave blank if allow all)</Form.Text>
               </Col>
               <Col sm={10}>
                 <Form.Check>
@@ -403,7 +373,7 @@ const AddNewStudies = () => {
                 <Form.Label>
                   Race
                 </Form.Label>
-                <Form.Text>(Leave blank if allow all)</Form.Text>
+                <Form.Text className="text-muted">(Leave blank if allow all)</Form.Text>
               </Col>
               <Col sm={10}>
                 <Form.Control name="race" as="select" onChange={handleChange} multiple>

@@ -1,0 +1,227 @@
+Date : 2021-05-25 16:55:04
+Directory : c:\Users\TN\nova-cs322
+Total : 153 files,  19124 codes, 212 comments, 829 blanks, all 20165 lines
+
+Languages
++------------------+------------+------------+------------+------------+------------+
+| language         | files      | code       | comment    | blank      | total      |
++------------------+------------+------------+------------+------------+------------+
+| JSON             |          3 |     14,636 |          0 |          3 |     14,639 |
+| JavaScript       |         63 |      2,987 |         90 |        359 |      3,436 |
+| Python           |         54 |        916 |         56 |        307 |      1,279 |
+| YAML             |          4 |        239 |          5 |         23 |        267 |
+| Markdown         |          2 |        111 |          0 |         52 |        163 |
+| SCSS             |         17 |         76 |         45 |         32 |        153 |
+| Makefile         |          1 |         43 |          2 |         15 |         60 |
+| HTML             |          3 |         40 |         11 |         20 |         71 |
+| pip requirements |          2 |         38 |          0 |          2 |         40 |
+| Docker           |          2 |         23 |          3 |         14 |         40 |
+| Properties       |          1 |         12 |          0 |          1 |         13 |
+| Ignore           |          1 |          3 |          0 |          1 |          4 |
++------------------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                      | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                         |        153 |     19,124 |        212 |        829 |     20,165 |
+| .circleci                                                                                 |          1 |         86 |          5 |          4 |         95 |
+| backend                                                                                   |         58 |        972 |         70 |        336 |      1,378 |
+| backend\common                                                                            |         12 |        143 |         17 |         59 |        219 |
+| backend\common\management                                                                 |          4 |         64 |          8 |         20 |         92 |
+| backend\common\management\commands                                                        |          3 |         64 |          8 |         19 |         91 |
+| backend\common\utils                                                                      |          2 |         37 |          9 |         19 |         65 |
+| backend\course                                                                            |          9 |         99 |          2 |         34 |        135 |
+| backend\course\migrations                                                                 |          3 |         36 |          2 |         15 |         53 |
+| backend\researcherFormApi                                                                 |          9 |        133 |          2 |         39 |        174 |
+| backend\researcherFormApi\migrations                                                      |          3 |         52 |          2 |         15 |         69 |
+| backend\sonaCS322                                                                         |         11 |        324 |         29 |        109 |        462 |
+| backend\sonaCS322\settings                                                                |          6 |        271 |         20 |         86 |        377 |
+| backend\templates                                                                         |          3 |         40 |         11 |         20 |         71 |
+| backend\templates\common                                                                  |          1 |         16 |          7 |          8 |         31 |
+| backend\templates\includes                                                                |          1 |          4 |          0 |          1 |          5 |
+| backend\users                                                                             |         12 |        194 |          5 |         58 |        257 |
+| backend\users\migrations                                                                  |          3 |         63 |          2 |         14 |         79 |
+| backend\users\tests                                                                       |          1 |          0 |          0 |          1 |          1 |
+| frontend                                                                                  |         72 |      2,841 |        103 |        360 |      3,304 |
+| frontend\js                                                                               |         54 |      2,758 |         58 |        323 |      3,139 |
+| frontend\js\actions                                                                       |          1 |          4 |          0 |          1 |          5 |
+| frontend\js\components                                                                    |         23 |      1,273 |         21 |        158 |      1,452 |
+| frontend\js\components\Navbar                                                             |          5 |        199 |          8 |         50 |        257 |
+| frontend\js\components\ParticipantDashboard                                               |          3 |        236 |          1 |         16 |        253 |
+| frontend\js\components\ResearcherDashboard                                                |         11 |        653 |         11 |         62 |        726 |
+| frontend\js\constants                                                                     |          1 |          1 |          0 |          0 |          1 |
+| frontend\js\pages                                                                         |         18 |      1,314 |         30 |        126 |      1,470 |
+| frontend\js\pages\Instructor                                                              |          2 |         25 |          0 |          7 |         32 |
+| frontend\js\pages\Participant                                                             |          7 |        412 |         12 |         49 |        473 |
+| frontend\js\pages\Researcher                                                              |          7 |        839 |         18 |         63 |        920 |
+| frontend\js\reducers                                                                      |          2 |         20 |          0 |          5 |         25 |
+| frontend\js\routes                                                                        |          1 |         31 |          0 |          2 |         33 |
+| frontend\js\store                                                                         |          1 |          8 |          0 |          3 |         11 |
+| frontend\js\utils                                                                         |          5 |         73 |          6 |         21 |        100 |
+| frontend\sass                                                                             |         17 |         76 |         45 |         32 |        153 |
+| frontend\sass\components                                                                  |          1 |          0 |          2 |          1 |          3 |
+| frontend\sass\helpers                                                                     |          6 |          5 |          1 |          6 |         12 |
+| frontend\sass\pages                                                                       |          5 |         42 |          2 |          8 |         52 |
+| frontend\sass\vendor                                                                      |          2 |         18 |         23 |          7 |         48 |
++-------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+
+| filename                                                                                  | language         | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+
+| c:\Users\TN\nova-cs322\.circleci\config.yml                                               | YAML             |         86 |          5 |          4 |         95 |
+| c:\Users\TN\nova-cs322\.dockerignore                                                      | Ignore           |          3 |          0 |          1 |          4 |
+| c:\Users\TN\nova-cs322\.eslintrc.js                                                       | JavaScript       |         24 |          0 |          2 |         26 |
+| c:\Users\TN\nova-cs322\.isort.cfg                                                         | Properties       |         12 |          0 |          1 |         13 |
+| c:\Users\TN\nova-cs322\.pre-commit-config.yaml                                            | YAML             |         54 |          0 |          2 |         56 |
+| c:\Users\TN\nova-cs322\.prospector.yaml                                                   | YAML             |         43 |          0 |          9 |         52 |
+| c:\Users\TN\nova-cs322\CONTRIBUTING.md                                                    | Markdown         |         22 |          0 |         15 |         37 |
+| c:\Users\TN\nova-cs322\Makefile                                                           | Makefile         |         43 |          2 |         15 |         60 |
+| c:\Users\TN\nova-cs322\README.md                                                          | Markdown         |         89 |          0 |         37 |        126 |
+| c:\Users\TN\nova-cs322\app.json                                                           | JSON             |         69 |          0 |          1 |         70 |
+| c:\Users\TN\nova-cs322\babel.config.js                                                    | JavaScript       |          5 |          0 |          2 |          7 |
+| c:\Users\TN\nova-cs322\backend\Dockerfile                                                 | Docker           |         16 |          3 |          9 |         28 |
+| c:\Users\TN\nova-cs322\backend\common\__init__.py                                         | Python           |          0 |          0 |          1 |          1 |
+| c:\Users\TN\nova-cs322\backend\common\context_processors.py                               | Python           |          5 |          0 |          5 |         10 |
+| c:\Users\TN\nova-cs322\backend\common\management\__init__.py                              | Python           |          0 |          0 |          1 |          1 |
+| c:\Users\TN\nova-cs322\backend\common\management\commands\__init__.py                     | Python           |          0 |          0 |          1 |          1 |
+| c:\Users\TN\nova-cs322\backend\common\management\commands\celery.py                       | Python           |         23 |          3 |          7 |         33 |
+| c:\Users\TN\nova-cs322\backend\common\management\commands\has_missing_migrations.py       | Python           |         41 |          5 |         11 |         57 |
+| c:\Users\TN\nova-cs322\backend\common\models.py                                           | Python           |          8 |          0 |          5 |         13 |
+| c:\Users\TN\nova-cs322\backend\common\routes.py                                           | Python           |          4 |          0 |          2 |          6 |
+| c:\Users\TN\nova-cs322\backend\common\urls.py                                             | Python           |          6 |          0 |          2 |          8 |
+| c:\Users\TN\nova-cs322\backend\common\utils\__init__.py                                   | Python           |          0 |          0 |          1 |          1 |
+| c:\Users\TN\nova-cs322\backend\common\utils\tests.py                                      | Python           |         37 |          9 |         18 |         64 |
+| c:\Users\TN\nova-cs322\backend\common\views.py                                            | Python           |         19 |          0 |          5 |         24 |
+| c:\Users\TN\nova-cs322\backend\course\__init__.py                                         | Python           |          0 |          0 |          1 |          1 |
+| c:\Users\TN\nova-cs322\backend\course\admin.py                                            | Python           |          3 |          0 |          2 |          5 |
+| c:\Users\TN\nova-cs322\backend\course\apps.py                                             | Python           |          4 |          0 |          3 |          7 |
+| c:\Users\TN\nova-cs322\backend\course\migrations\0001_initial.py                          | Python           |         15 |          1 |          7 |         23 |
+| c:\Users\TN\nova-cs322\backend\course\migrations\0002_initial.py                          | Python           |         21 |          1 |          7 |         29 |
+| c:\Users\TN\nova-cs322\backend\course\migrations\__init__.py                              | Python           |          0 |          0 |          1 |          1 |
+| c:\Users\TN\nova-cs322\backend\course\models.py                                           | Python           |          7 |          0 |          1 |          8 |
+| c:\Users\TN\nova-cs322\backend\course\serializers.py                                      | Python           |         10 |          0 |          5 |         15 |
+| c:\Users\TN\nova-cs322\backend\course\views.py                                            | Python           |         39 |          0 |          7 |         46 |
+| c:\Users\TN\nova-cs322\backend\manage.py                                                  | Python           |         23 |          1 |          8 |         32 |
+| c:\Users\TN\nova-cs322\backend\researcherFormApi\__init__.py                              | Python           |          0 |          0 |          1 |          1 |
+| c:\Users\TN\nova-cs322\backend\researcherFormApi\admin.py                                 | Python           |          3 |          0 |          2 |          5 |
+| c:\Users\TN\nova-cs322\backend\researcherFormApi\apps.py                                  | Python           |          3 |          0 |          3 |          6 |
+| c:\Users\TN\nova-cs322\backend\researcherFormApi\migrations\0001_initial.py               | Python           |         31 |          1 |          7 |         39 |
+| c:\Users\TN\nova-cs322\backend\researcherFormApi\migrations\0002_initial.py               | Python           |         21 |          1 |          7 |         29 |
+| c:\Users\TN\nova-cs322\backend\researcherFormApi\migrations\__init__.py                   | Python           |          0 |          0 |          1 |          1 |
+| c:\Users\TN\nova-cs322\backend\researcherFormApi\models.py                                | Python           |         25 |          0 |          4 |         29 |
+| c:\Users\TN\nova-cs322\backend\researcherFormApi\serializers.py                           | Python           |          8 |          0 |          3 |         11 |
+| c:\Users\TN\nova-cs322\backend\researcherFormApi\views.py                                 | Python           |         42 |          0 |         11 |         53 |
+| c:\Users\TN\nova-cs322\backend\sonaCS322\__init__.py                                      | Python           |          1 |          0 |          1 |          2 |
+| c:\Users\TN\nova-cs322\backend\sonaCS322\celery.py                                        | Python           |         19 |          0 |          6 |         25 |
+| c:\Users\TN\nova-cs322\backend\sonaCS322\celerybeat_schedule.py                           | Python           |          4 |          1 |          3 |          8 |
+| c:\Users\TN\nova-cs322\backend\sonaCS322\settings\__init__.py                             | Python           |          0 |          0 |          1 |          1 |
+| c:\Users\TN\nova-cs322\backend\sonaCS322\settings\base.py                                 | Python           |        131 |          9 |         39 |        179 |
+| c:\Users\TN\nova-cs322\backend\sonaCS322\settings\local.py                                | Python           |          1 |          0 |          1 |          2 |
+| c:\Users\TN\nova-cs322\backend\sonaCS322\settings\local_base.py                           | Python           |         39 |          3 |         15 |         57 |
+| c:\Users\TN\nova-cs322\backend\sonaCS322\settings\production.py                           | Python           |         84 |          6 |         21 |        111 |
+| c:\Users\TN\nova-cs322\backend\sonaCS322\settings\test.py                                 | Python           |         16 |          2 |          9 |         27 |
+| c:\Users\TN\nova-cs322\backend\sonaCS322\urls.py                                          | Python           |         25 |          0 |          7 |         32 |
+| c:\Users\TN\nova-cs322\backend\sonaCS322\wsgi.py                                          | Python           |          4 |          8 |          6 |         18 |
+| c:\Users\TN\nova-cs322\backend\templates\base.html                                        | HTML             |         20 |          4 |         11 |         35 |
+| c:\Users\TN\nova-cs322\backend\templates\common\index.html                                | HTML             |         16 |          7 |          8 |         31 |
+| c:\Users\TN\nova-cs322\backend\templates\includes\sentry_init.html                        | HTML             |          4 |          0 |          1 |          5 |
+| c:\Users\TN\nova-cs322\backend\users\__init__.py                                          | Python           |          0 |          0 |          1 |          1 |
+| c:\Users\TN\nova-cs322\backend\users\admin.py                                             | Python           |         23 |          0 |          7 |         30 |
+| c:\Users\TN\nova-cs322\backend\users\apps.py                                              | Python           |          3 |          0 |          3 |          6 |
+| c:\Users\TN\nova-cs322\backend\users\managers.py                                          | Python           |         14 |          0 |          4 |         18 |
+| c:\Users\TN\nova-cs322\backend\users\migrations\0001_initial.py                           | Python           |         46 |          1 |          7 |         54 |
+| c:\Users\TN\nova-cs322\backend\users\migrations\0002_auto_20210520_2152.py                | Python           |         17 |          1 |          6 |         24 |
+| c:\Users\TN\nova-cs322\backend\users\migrations\__init__.py                               | Python           |          0 |          0 |          1 |          1 |
+| c:\Users\TN\nova-cs322\backend\users\models.py                                            | Python           |         52 |          3 |         15 |         70 |
+| c:\Users\TN\nova-cs322\backend\users\serializers.py                                       | Python           |          6 |          0 |          1 |          7 |
+| c:\Users\TN\nova-cs322\backend\users\tasks.py                                             | Python           |          5 |          0 |          4 |          9 |
+| c:\Users\TN\nova-cs322\backend\users\tests\__init__.py                                    | Python           |          0 |          0 |          1 |          1 |
+| c:\Users\TN\nova-cs322\backend\users\views.py                                             | Python           |         28 |          0 |          8 |         36 |
+| c:\Users\TN\nova-cs322\docker-compose.yml                                                 | YAML             |         56 |          0 |          8 |         64 |
+| c:\Users\TN\nova-cs322\frontend\Dockerfile                                                | Docker           |          7 |          0 |          5 |         12 |
+| c:\Users\TN\nova-cs322\frontend\js\App.js                                                 | JavaScript       |         18 |          0 |          3 |         21 |
+| c:\Users\TN\nova-cs322\frontend\js\actions\index.js                                       | JavaScript       |          4 |          0 |          1 |          5 |
+| c:\Users\TN\nova-cs322\frontend\js\components\Login.js                                    | JavaScript       |         47 |          1 |          9 |         57 |
+| c:\Users\TN\nova-cs322\frontend\js\components\Logout.js                                   | JavaScript       |         36 |          0 |         10 |         46 |
+| c:\Users\TN\nova-cs322\frontend\js\components\Navbar\InstructorNav.js                     | JavaScript       |         39 |          0 |         11 |         50 |
+| c:\Users\TN\nova-cs322\frontend\js\components\Navbar\ParticipantNav.js                    | JavaScript       |         59 |          0 |         13 |         72 |
+| c:\Users\TN\nova-cs322\frontend\js\components\Navbar\ResearchNav.js                       | JavaScript       |         44 |          0 |         11 |         55 |
+| c:\Users\TN\nova-cs322\frontend\js\components\Navbar\index.js                             | JavaScript       |         27 |          0 |          7 |         34 |
+| c:\Users\TN\nova-cs322\frontend\js\components\Navbar\logoutDropdown.js                    | JavaScript       |         30 |          8 |          8 |         46 |
+| c:\Users\TN\nova-cs322\frontend\js\components\ParticipantDashboard\mySchedules.js         | JavaScript       |         22 |          0 |          2 |         24 |
+| c:\Users\TN\nova-cs322\frontend\js\components\ParticipantDashboard\profileModal.js        | JavaScript       |        188 |          1 |         10 |        199 |
+| c:\Users\TN\nova-cs322\frontend\js\components\ParticipantDashboard\signUp.js              | JavaScript       |         26 |          0 |          4 |         30 |
+| c:\Users\TN\nova-cs322\frontend\js\components\PrescreenForm.js                            | JavaScript       |         85 |          0 |          8 |         93 |
+| c:\Users\TN\nova-cs322\frontend\js\components\ProtectedRoutes.js                          | JavaScript       |         17 |          0 |          3 |         20 |
+| c:\Users\TN\nova-cs322\frontend\js\components\ResearcherDashboard\TimeslotModal.js        | JavaScript       |         81 |          2 |         12 |         95 |
+| c:\Users\TN\nova-cs322\frontend\js\components\ResearcherDashboard\addNewStudy.js          | JavaScript       |         24 |          0 |          4 |         28 |
+| c:\Users\TN\nova-cs322\frontend\js\components\ResearcherDashboard\allStudiesCard.js       | JavaScript       |         24 |          0 |          4 |         28 |
+| c:\Users\TN\nova-cs322\frontend\js\components\ResearcherDashboard\dashboardCard.js        | JavaScript       |         10 |          0 |          3 |         13 |
+| c:\Users\TN\nova-cs322\frontend\js\components\ResearcherDashboard\index.js                | JavaScript       |          6 |          0 |          1 |          7 |
+| c:\Users\TN\nova-cs322\frontend\js\components\ResearcherDashboard\myStudiesCard.js        | JavaScript       |         32 |          1 |          4 |         37 |
+| c:\Users\TN\nova-cs322\frontend\js\components\ResearcherDashboard\prescreenResult.js      | JavaScript       |         18 |          0 |          3 |         21 |
+| c:\Users\TN\nova-cs322\frontend\js\components\ResearcherDashboard\profileModal.js         | JavaScript       |         36 |          0 |          4 |         40 |
+| c:\Users\TN\nova-cs322\frontend\js\components\ResearcherDashboard\recentActivities.js     | JavaScript       |         30 |          0 |          3 |         33 |
+| c:\Users\TN\nova-cs322\frontend\js\components\ResearcherDashboard\researchEditModal.js    | JavaScript       |        348 |          8 |         21 |        377 |
+| c:\Users\TN\nova-cs322\frontend\js\components\ResearcherDashboard\upcomingAppointments.js | JavaScript       |         44 |          0 |          3 |         47 |
+| c:\Users\TN\nova-cs322\frontend\js\constants\index.js                                     | JavaScript       |          1 |          0 |          0 |          1 |
+| c:\Users\TN\nova-cs322\frontend\js\index.js                                               | JavaScript       |         16 |          1 |          4 |         21 |
+| c:\Users\TN\nova-cs322\frontend\js\pages\Dashboard.js                                     | JavaScript       |         27 |          0 |          3 |         30 |
+| c:\Users\TN\nova-cs322\frontend\js\pages\Home.js                                          | JavaScript       |         11 |          0 |          4 |         15 |
+| c:\Users\TN\nova-cs322\frontend\js\pages\Instructor\InstructorDashboard.js                | JavaScript       |          9 |          0 |          4 |         13 |
+| c:\Users\TN\nova-cs322\frontend\js\pages\Instructor\index.js                              | JavaScript       |         16 |          0 |          3 |         19 |
+| c:\Users\TN\nova-cs322\frontend\js\pages\Participant\AllStudies.js                        | JavaScript       |        114 |          9 |         11 |        134 |
+| c:\Users\TN\nova-cs322\frontend\js\pages\Participant\CurrStudy.js                         | JavaScript       |        124 |          2 |         11 |        137 |
+| c:\Users\TN\nova-cs322\frontend\js\pages\Participant\Dashboard.js                         | JavaScript       |         25 |          0 |          6 |         31 |
+| c:\Users\TN\nova-cs322\frontend\js\pages\Participant\MySchedule.js                        | JavaScript       |          7 |          0 |          3 |         10 |
+| c:\Users\TN\nova-cs322\frontend\js\pages\Participant\Timeslots.js                         | JavaScript       |         75 |          1 |         11 |         87 |
+| c:\Users\TN\nova-cs322\frontend\js\pages\Participant\TimeslotsRow.js                      | JavaScript       |         29 |          0 |          3 |         32 |
+| c:\Users\TN\nova-cs322\frontend\js\pages\Participant\index.js                             | JavaScript       |         38 |          0 |          4 |         42 |
+| c:\Users\TN\nova-cs322\frontend\js\pages\Researcher\AddAppointment.js                     | JavaScript       |         68 |          1 |          6 |         75 |
+| c:\Users\TN\nova-cs322\frontend\js\pages\Researcher\AddNewStudies.js                      | JavaScript       |        398 |          8 |         19 |        425 |
+| c:\Users\TN\nova-cs322\frontend\js\pages\Researcher\AllResearches.js                      | JavaScript       |        105 |          1 |         10 |        116 |
+| c:\Users\TN\nova-cs322\frontend\js\pages\Researcher\EditTimeslot.js                       | JavaScript       |         99 |          8 |         11 |        118 |
+| c:\Users\TN\nova-cs322\frontend\js\pages\Researcher\MyResearches.js                       | JavaScript       |         98 |          0 |         10 |        108 |
+| c:\Users\TN\nova-cs322\frontend\js\pages\Researcher\ResearcherDashboard.js                | JavaScript       |         29 |          0 |          3 |         32 |
+| c:\Users\TN\nova-cs322\frontend\js\pages\Researcher\index.js                              | JavaScript       |         42 |          0 |          4 |         46 |
+| c:\Users\TN\nova-cs322\frontend\js\reducers\addAppointmentSlots.js                        | JavaScript       |         15 |          0 |          3 |         18 |
+| c:\Users\TN\nova-cs322\frontend\js\reducers\index.js                                      | JavaScript       |          5 |          0 |          2 |          7 |
+| c:\Users\TN\nova-cs322\frontend\js\routes\Routes.js                                       | JavaScript       |         31 |          0 |          2 |         33 |
+| c:\Users\TN\nova-cs322\frontend\js\store\index.js                                         | JavaScript       |          8 |          0 |          3 |         11 |
+| c:\Users\TN\nova-cs322\frontend\js\utils\SentryBoundary.js                                | JavaScript       |         48 |          2 |         13 |         63 |
+| c:\Users\TN\nova-cs322\frontend\js\utils\getCookieToken.js                                | JavaScript       |         10 |          0 |          0 |         10 |
+| c:\Users\TN\nova-cs322\frontend\js\utils\index.js                                         | JavaScript       |          2 |          0 |          2 |          4 |
+| c:\Users\TN\nova-cs322\frontend\js\utils\refreshToken.js                                  | JavaScript       |         11 |          4 |          4 |         19 |
+| c:\Users\TN\nova-cs322\frontend\js\utils\urls.js                                          | JavaScript       |          2 |          0 |          2 |          4 |
+| c:\Users\TN\nova-cs322\frontend\sass\_global.scss                                         | SCSS             |          0 |          0 |          1 |          1 |
+| c:\Users\TN\nova-cs322\frontend\sass\_variables.scss                                      | SCSS             |          0 |          0 |          1 |          1 |
+| c:\Users\TN\nova-cs322\frontend\sass\components\_all.scss                                 | SCSS             |          0 |          2 |          1 |          3 |
+| c:\Users\TN\nova-cs322\frontend\sass\helpers\_all.scss                                    | SCSS             |          5 |          1 |          1 |          7 |
+| c:\Users\TN\nova-cs322\frontend\sass\helpers\_functions.scss                              | SCSS             |          0 |          0 |          1 |          1 |
+| c:\Users\TN\nova-cs322\frontend\sass\helpers\_helpers.scss                                | SCSS             |          0 |          0 |          1 |          1 |
+| c:\Users\TN\nova-cs322\frontend\sass\helpers\_mixins.scss                                 | SCSS             |          0 |          0 |          1 |          1 |
+| c:\Users\TN\nova-cs322\frontend\sass\helpers\_placeholders.scss                           | SCSS             |          0 |          0 |          1 |          1 |
+| c:\Users\TN\nova-cs322\frontend\sass\helpers\_typography.scss                             | SCSS             |          0 |          0 |          1 |          1 |
+| c:\Users\TN\nova-cs322\frontend\sass\pages\_all.scss                                      | SCSS             |          4 |          1 |          1 |          6 |
+| c:\Users\TN\nova-cs322\frontend\sass\pages\_home.scss                                     | SCSS             |         13 |          1 |          4 |         18 |
+| c:\Users\TN\nova-cs322\frontend\sass\pages\_participant.scss                              | SCSS             |          4 |          0 |          0 |          4 |
+| c:\Users\TN\nova-cs322\frontend\sass\pages\_researchDashboard.scss                        | SCSS             |         14 |          0 |          2 |         16 |
+| c:\Users\TN\nova-cs322\frontend\sass\pages\dashboard.scss                                 | SCSS             |          7 |          0 |          1 |          8 |
+| c:\Users\TN\nova-cs322\frontend\sass\style.scss                                           | SCSS             |         11 |         17 |          8 |         36 |
+| c:\Users\TN\nova-cs322\frontend\sass\vendor\_bootstrap-includes.scss                      | SCSS             |         18 |         23 |          6 |         47 |
+| c:\Users\TN\nova-cs322\frontend\sass\vendor\custom-bootstrap.scss                         | SCSS             |          0 |          0 |          1 |          1 |
+| c:\Users\TN\nova-cs322\jest-setup.js                                                      | JavaScript       |          3 |          1 |          3 |          7 |
+| c:\Users\TN\nova-cs322\jest.config.js                                                     | JavaScript       |         17 |         23 |          1 |         41 |
+| c:\Users\TN\nova-cs322\package-lock.json                                                  | JSON             |     14,457 |          0 |          1 |     14,458 |
+| c:\Users\TN\nova-cs322\package.json                                                       | JSON             |        110 |          0 |          1 |        111 |
+| c:\Users\TN\nova-cs322\postcss.config.js                                                  | JavaScript       |          5 |          0 |          1 |          6 |
+| c:\Users\TN\nova-cs322\requirements.in                                                    | pip requirements |         19 |          0 |          1 |         20 |
+| c:\Users\TN\nova-cs322\requirements.txt                                                   | pip requirements |         19 |          0 |          1 |         20 |
+| c:\Users\TN\nova-cs322\server.js                                                          | JavaScript       |         16 |          1 |          4 |         21 |
+| c:\Users\TN\nova-cs322\webpack.base.config.js                                             | JavaScript       |         44 |          3 |          2 |         49 |
+| c:\Users\TN\nova-cs322\webpack.local.config.js                                            | JavaScript       |         60 |          3 |         11 |         74 |
+| c:\Users\TN\nova-cs322\webpack.prod.config.js                                             | JavaScript       |         55 |          1 |         10 |         66 |
+| Total                                                                                     |                  |     19,124 |        212 |        829 |     20,165 |
++-------------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+

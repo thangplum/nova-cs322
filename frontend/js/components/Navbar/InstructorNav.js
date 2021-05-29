@@ -1,14 +1,12 @@
 import { faHome, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Navbar, Nav, Form } from 'react-bootstrap'
-import { NavLink, useRouteMatch } from 'react-router-dom';
-import axios from 'axios';
-import getCookieToken from '../../utils/getCookieToken';
+import { NavLink, useRouteMatch } from 'react-router-dom'
 
 import ProfileModal from '../ParticipantDashboard/profileModal'
 
-const ParticipantNav =  () => {
+const InstructorNav =  () => {
   const { path } = useRouteMatch();
   const [show, setShow] = useState(false);
 
@@ -18,26 +16,6 @@ const ParticipantNav =  () => {
   const logout = () => {
     window.location.href = "/logout";
   }
-
-  useEffect(() => {
-    var csrftoken = getCookieToken('csrftoken');
-
-    axios.get('/api/profile/', {
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Requested-With': 'XMLHttpRequest',
-        'X-CSRFToken': csrftoken
-      }
-    }).then (
-      response => {
-        if (response.data.name === '') {
-          setShow(true);
-        }
-      }
-    ).catch (
-      error => console.log(error)
-    )
-  }, [])
 
   return (
       <Navbar style={{ marginBottom: "20px"}} expand="lg">
@@ -68,4 +46,4 @@ const ParticipantNav =  () => {
   );
 }
 
-export default ParticipantNav;
+export default InstructorNav;

@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
-import addNew from './addNew';
+import addAppointmentSlots from './addAppointmentSlots';
 
 export default combineReducers({
-  addNew
+  addAppointment: addAppointmentSlots
 })
