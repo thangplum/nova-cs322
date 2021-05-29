@@ -5,9 +5,8 @@ import {
 } from "react-router-dom";
 import Home from '../pages/Home';
 import Dashboard from '../pages/Dashboard';
-import StudentDashboard from '../pages/StudentDashboard';
-import InstructorDashboard from '../pages/InstructorDashboard';
-import ResearchRoutes from '../pages/Researcher/index';
+import InstructorRoutes from '../pages/Instructor';
+import ResearchRoutes from '../pages/Researcher';
 import ParticipantRoutes from '../pages/Participant';
 
 export const Routes = () => {
@@ -26,7 +25,7 @@ export const Routes = () => {
         <ResearchRoutes />
       </Route>
       <Route path='/instructor'>
-        <InstructorDashboard />
+        <InstructorRoutes />
       </Route>
     </Switch>
   );

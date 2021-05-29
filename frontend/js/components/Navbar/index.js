@@ -4,7 +4,11 @@ import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
+
 const NavBar =  () => {
+  const logout = () => {
+    window.location.href = "http://localhost:8000/logout";
+  }
 
   return (
     <Navbar style={{ marginBottom: "20px" }} expand="lg">
@@ -16,11 +20,10 @@ const NavBar =  () => {
       </Nav>
       
       <Form inline>
-        {/* <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to={"/logout"}>
-          Logout
+        <a onClick={logout}>
+          Log out
           <FontAwesomeIcon style={{ marginLeft: '5px'}} icon={faSignOutAlt} />
-        </NavLink> */}
-        <a href="logout">Log out</a>
+        </a>
       </Form>
       
     </Navbar>

@@ -6,6 +6,11 @@ from common.models import IndexedTimeStampedModel
 
 from .managers import UserManager
 
+from allauth.socialaccount.models import SocialAccount
+from django.dispatch import receiver
+from django.db.models.signals import post_save
+from django.contrib.postgres.fields import ArrayField
+
 
 class User(AbstractBaseUser, PermissionsMixin, IndexedTimeStampedModel):
     email = models.EmailField(max_length=255, unique=True)
@@ -32,3 +37,21 @@ class User(AbstractBaseUser, PermissionsMixin, IndexedTimeStampedModel):
 
     def __str__(self):
         return self.email
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100, blank=True)
+    age = models.CharField(max_length=100, blank=True)
+    ethnicity = models.CharField(max_length=100, blank=True)
+    race = models.CharField(max_length=100, blank=True)
+    surveys = ArrayField(models.CharField(max_length=100), blank=True, default=list)
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)   
+    instance.profile.save()
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()

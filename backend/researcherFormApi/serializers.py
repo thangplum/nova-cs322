@@ -1,8 +1,11 @@
 from rest_framework import serializers
 
 from .models import formResearch
+            
 
-class formResearchSerializer(serializers.HyperlinkedModelSerializer):
+class formResearchSerializer(serializers.ModelSerializer):
     class Meta:
         model = formResearch
-        fields = ("id","firstname", "lastname","email","student_id","gender")
+        fields = '__all__'
+    race = serializers.ListField()
+    gender = serializers.ListField()

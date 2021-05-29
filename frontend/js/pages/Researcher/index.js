@@ -7,10 +7,10 @@ import {
 import ResearchNav from "../../components/Navbar/ResearchNav";
 import ResearcherDashboard from './ResearcherDashboard';
 import AddNewStudies from "./AddNewStudies";
+import AddAppointment from './AddAppointment';
 
 const ResearchRoutes = () => {
   const { path } = useRouteMatch();
-  console.log(path)
 
   return (
     <div id="research-routes-page" className="main-container">
@@ -21,6 +21,9 @@ const ResearchRoutes = () => {
         </Route>
         <Route path={`${path}/add-new`}>
           <AddNewStudies />
+        </Route>
+        <Route path={`${path}/add-appointment`}>
+          <AddAppointment />
         </Route>
       </Switch>
       
