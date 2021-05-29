@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Table, Button, Pagination } from 'react-bootstrap';
+import getCookieToken from '../../utils/getCookieToken';
 import axios from 'axios';
-import getCookieToken from "../../utils/getCookieToken";
-import { useLocation } from "react-router-dom";
-import { Link } from 'react-router-dom';
+import TimeslotModal from '../../components/ResearcherDashboard/TimeslotModal';
 
-const AllStudies = () => {
-  const [allStudies, setAllStudies] = useState([]);
+
+const EditTimeslot = () => {
+  const [studies, setStudies] = useState([]);
+  const [show, setShow] = useState(false);
+  const [currId, setCurrId] = useState('');
   const [count, setCount] = useState(0);
   const [currPage, setCurrPage] = useState(1);
 
-  let location= useLocation();
+  const handleClose = () => setShow(false);
+  const handleShow = (id) => {
+    setCurrId(id);
+    setShow(true);
+  };
 
-  // Setup pagination
   let items = [];
 
   for (let number = 1; number <= Math.ceil(count/10); number++) {
@@ -26,7 +31,7 @@ const AllStudies = () => {
   const handleNavigate = async (pageNumber) => {
     var csrftoken = getCookieToken('csrftoken');
     setCurrPage(pageNumber);
-    let next = `/api/form/?limit=10&offset=${(pageNumber - 1) * 10}`;
+    let next = '/api/research/';
     
     try {
       const res = await axios.get(next, {
@@ -36,7 +41,8 @@ const AllStudies = () => {
           'X-CSRFToken': csrftoken
         }
       });
-      setAllStudies(res.data);
+      console.log(res.data);
+      setStudies(res.data);
       setCount(res.data.length);
       
     } catch(err) {
@@ -52,53 +58,31 @@ const AllStudies = () => {
     <div id="all-studies-page">
       <Card className="db-card" id="info">
         <Card.Header as="h3">
-          <div style={{ fontWeight: "700" }}>All available studies</div>
+          <div style={{ fontWeight: "700" }}>My researches</div>
         </Card.Header>
         <Card.Body>
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th style={{ width: "15%" }}></th>
-                <th>Study Information</th>
-                <th>Eligibility</th>
+                <th style={{ width: '10%' }}>Index</th>
+                <th>Research Information</th>
+                <th style={{ width: '15%' }}>Edit</th>
               </tr>
             </thead>
             <tbody>
-              {allStudies.length > 0 && allStudies.map((study) => {
+              {studies.map((study) => {
                 return (
                   <tr key={study.id}>
-                    <td style={{ verticalAlign: "middle" }}>
-                      {study.activeStudy ? 
-                      <div className="available-button">
-                        <Link to={`${location.pathname}/${study.id}`}>
-                          <Button>Reserve</Button>
-                        </Link>
-                      </div> :
-                      <div className="available-button">Timeslot is not available</div>
-                      }
-                    </td>
-                    <td>
-                      <div style={{ fontWeight: "600", fontSize: "1.5rem"}}>{study.studyName}</div>
-                      <div>{study.researcher}</div>
-                      <div>{study.creditsResearch} credit(s)</div>
-                    </td>
-                    <td>
-                      <div>
-                        Age: {study.minAge !== "" && study.maxAge !== "" ? `Between age ${study.minAge} and ${study.maxAge}` :
-                              study.minAge !== "" && study.maxAge === "" ? `Older than ${study.minAge}` :
-                              study.minAge === "" && study.maxAge !== "" ? `Younger than ${study.maxAge}` :
-                              "All"}
-                      </div>
-                      <div>
-                        Gender: {study.gender.length > 0 ? study.gender.join(", ") : "All"}
-                      </div>
-                      <div>
-                        Race: {study.race.length > 0 ? study.race.join(", ") : "All"}
-                      </div>
-                      <div>
-                        Ethnicity: {study.ethnicity !== "" ? study.ethnicity : "All"}
-                      </div>
-                    </td>
+                    <th>{study.id}</th>
+                    <th><h4>{study.studyName}</h4></th>
+                    <th>
+                      <Button 
+                        style={{ width: '100%' }}
+                        onClick={() => handleShow(study.id)}
+                      >
+                        Edit
+                      </Button>
+                    </th>
                   </tr>
                 );
               })}
@@ -124,11 +108,11 @@ const AllStudies = () => {
               <Pagination.Last disabled={currPage === Math.ceil(count/10) ? true : false} onClick={() => handleNavigate(Math.ceil(count/10))} />
             </Pagination> : null
           }
-          
         </Card.Body>
       </Card>
+      <TimeslotModal id={currId} show={show} handleClose={handleClose} />
     </div>
   );
 }
 
-export default AllStudies;
+export default EditTimeslot;

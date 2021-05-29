@@ -9,6 +9,7 @@ import Dashboard from "./Dashboard";
 import MySchedule from "./MySchedule";
 import AllStudies from "./AllStudies";
 import CurrStudy from "./CurrStudy";
+import Timeslots from './Timeslots';
 
 const ParticipantRoutes = () => {
   const { path } = useRouteMatch();
@@ -26,8 +27,11 @@ const ParticipantRoutes = () => {
         <Route exact path={`${path}/all-studies`}>
           <AllStudies />
         </Route>
-        <Route path={`${path}/all-studies/:id`}>
+        <Route exact path={`${path}/all-studies/:id`}>
           <CurrStudy />
+        </Route>
+        <Route path={`${path}/all-studies/:id/timeslots`}>
+          <Timeslots />
         </Route>
       </Switch>
       

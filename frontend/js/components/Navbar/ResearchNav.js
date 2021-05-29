@@ -27,8 +27,8 @@ const ResearchNav =  () => {
         <Navbar.Collapse>
           <Nav className="mr-auto">
             <NavLink style={{ textDecoration: "none", marginRight: "20px" }} to={`${path}`}><FontAwesomeIcon style={{ marginRight: '5px'}} icon={faHome} /></NavLink>
-            <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to={`${path}/`}>My studies</NavLink>
-            <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to="/">All studies</NavLink>
+            <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to={`${path}/my-researches`}>My studies</NavLink>
+            <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to={`${path}/all-researches`}>All studies</NavLink>
             <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to={`${path}/add-new`}>Add new study</NavLink>
             <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to="/">Prescreen results</NavLink>
             <NavLink style={{ textDecoration: "none", marginRight: "20px" }} className="link" to="/dashboard">Dashboard</NavLink>
